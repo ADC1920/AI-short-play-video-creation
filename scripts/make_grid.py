@@ -3,7 +3,8 @@
 """本地宫格拼图（ai-short-play-video-creation 技能）。把多张图按序拼成宫格，替代在线拼图工具。
 
 默认 9 张拼 3×3 九宫格（场景九宫格工作流）；--cols 5 支持 25 张拼 5×5。
-图片顺序按文件名中的数字自然排序（1.png、2.png…或含数字的任意命名）。
+图片顺序按文件名中的数字自然排序（1.png、2.png…或含数字的任意命名）；
+传入目录时递归扫描子目录（同一项目把图片分文件夹存放也能一次拼齐）。
 
 依赖: pip install pillow
 用法:
@@ -39,7 +40,7 @@ def collect(paths):
     for p in paths:
         f = Path(p)
         if f.is_dir():
-            files += [c for c in sorted(f.iterdir()) if c.suffix.lower() in EXTS]
+            files += [c for c in sorted(f.rglob("*")) if c.is_file() and c.suffix.lower() in EXTS]
         elif f.suffix.lower() in EXTS:
             files.append(f)
         else:
@@ -97,7 +98,15 @@ def selftest():
         for i, color in enumerate(CELL_COLORS[:4]):
             px = g4.getpixel(((i % 2) * 64 + 32, (i // 2) * 64 + 32))
             assert px == color, (i, px, color)
-    print("selftest PASS（9 色块 3×3 + 4 色块 2×2，位置与颜色逐格核对）")
+        # 递归目录回归（v1.5.0：子目录图片也应被收集）
+        nested = Path(tmp) / "nested" / "sub"
+        nested.mkdir(parents=True)
+        for i, color in enumerate(CELL_COLORS[:4], 1):
+            Image.new("RGB", (64, 64), color).save(nested / f"{i}.png")
+        found = collect([Path(tmp) / "nested"])
+        assert len(found) == 4, f"嵌套目录收集数 {len(found)} != 4"
+        assert all("sub" in str(f) for f in found), "嵌套文件路径异常"
+    print("selftest PASS（9 色块 3×3 + 4 色块 2×2，位置与颜色逐格核对；嵌套目录收集）")
     return 0
 
 

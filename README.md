@@ -28,7 +28,13 @@
 - **路线 B 宫格分镜直生**：剧情一句话 → 分镜 JSON（可机检）→ 宫格分镜图 → 一张图直出 15s 连贯片段。
 - **路线 C 人脸审核规避五法**：人物参考图被人脸检测拦截时的五种替代方案，各带生成与使用提示词。
 
-另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`）、多集连续性台账（`references/continuity-log.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、故障首修表、首镜 2 秒钩子法则。
+另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`，含抽帧/裁剪/拼接的 ffmpeg 落地命令）、多集连续性台账（`references/continuity-log.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、故障首修表、首镜 2 秒钩子法则。
+
+## 快速上手（最小示例）
+
+1. **有剧本**：让 Agent 走路线 A——把 `references/agent-prompt.md` 的系统提示词粘进对话助手，贴剧本得分镜蓝图，逐镜生成。
+2. **只有一句话梗概**：走路线 B——生成宫格分镜 JSON，备好图片后用 `python scripts/make_grid.py -o grid.png <图片目录>` 本地拼宫格，宫格图直出视频。
+3. **工程工具**：素材与 @ 引用核对 `python scripts/check_refs.py <项目目录>`；分镜 JSON 机检 `python scripts/validate_storyboard.py <story.json>`；多集项目建结构 `python scripts/init_project.py <项目目录> --episodes 12`。
 
 ## 安装
 

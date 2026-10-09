@@ -1,5 +1,15 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.5.0 — 2026-10-09
+
+落地闭环与画风适配（全量审查后 P1-P3 优化落地）：
+
+- `references/transition-editing.md` 新增「本机落地命令」节：抽尾帧/首帧、掐头去尾（快档 `-c copy` 近似 / 准档 trim 滤镜帧精确两方案）、无损拼接（含 list.txt 写法与参数不一致时的处置）；全部命令经 30fps 测试片实测（帧数/时长/中文空格路径核验）。
+- `references/agent-prompt.md`：必加质量词按画风二选一（写实向 / 动画向分列），并注明人物/场景模板中的写实词走动画风时整组替换；补充 frame-industrial（8 段式写法）与抽帧命令两处互引。
+- SKILL.md：排障表暧昧词替换具体化（blush on cheeks→rose tint、extreme close-up→medium shot 等样本）；拼接跳帧行补命令指针；路线 B 补候选图环节（1–2 张选优再放大）；黄金节奏补 onlyshot-drama 长叙事节奏互引。
+- `scripts/make_grid.py`：目录扫描支持递归子目录（selftest 增嵌套用例）。
+- README：新增「快速上手（最小示例）」节。
+
 ## 1.4.2 — 2026-10-09
 
 项目再次更名：ai-short-play-video → ai-short-play-video-creation（技能名/目录名统一；GitHub 仓库更名为 AI-short-play-video-creation）。功能内容与 v1.4.1 完全一致。更名链：manju-video → ai-short-play-video → ai-short-play-video-creation。

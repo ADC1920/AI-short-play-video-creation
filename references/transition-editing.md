@@ -118,7 +118,56 @@
 
 边界帧在**视觉上**衔接，不是逐像素拼接——期待像素级完美会导致无限重做。按序检查：①边界两侧（姿态/道具/光/运动方向）②完整延长段（不只接缝）③有没有东西提前出现或错误留存（向后延长）④跨边界音频连续性（延长段音量可能与源片略有差异）。**只重做失败的那一段。**
 
-## 九、与现有文档的关系
+## 九、本机落地命令（抽帧 · 裁剪 · 拼接）
+
+上面所有的「截取尾帧」「掐头去尾」「拼接成集」在本地用 ffmpeg 完成（全部命令经 30fps 测试片实测，含中文/空格路径；Windows 在 Git Bash 或 PowerShell 中同样可用，含空格路径加引号）。抽帧与拼接对合成长度不敏感，直接用；裁剪分快/准两档，按精度要求选。
+
+**抽帧（接力与衔接用）**：
+
+```bash
+# 抽尾帧（作下一镜首帧参考）
+ffmpeg -sseof -0.1 -i 镜01.mp4 -frames:v 1 -update 1 镜01_尾帧.png
+# 抽首帧（检查构图/作首帧素材）
+ffmpeg -i 镜01.mp4 -frames:v 1 -update 1 镜01_首帧.png
+```
+
+尾帧抽的是「最后 0.1 秒内的帧」——模型生成的片子常在末帧糊，抽帧后目检一次，糊了就往前多抽几帧挑一张。
+
+**裁剪（跳帧修复：去尾数帧 + 去头 1 帧）**：
+
+快档（`-c copy` 不重编码，秒出，精度受关键帧边界限制、误差 <0.1s，粗修够用）：
+
+```bash
+# 去尾 0.2s（先查时长：ffprobe -v error -show_entries format=duration -of csv=p=0 镜01.mp4）
+ffmpeg -i 镜01.mp4 -t 4.8 -c copy 镜01_cut.mp4
+# 去头 1 帧（30fps 约 0.033s；25fps 用 0.04，60fps 用 0.017）
+ffmpeg -ss 0.033 -i 镜02.mp4 -c copy 镜02_cut.mp4
+```
+
+准档（trim 滤镜重编码，**帧精确**，适合接缝要求高时；`-an` 丢原声、成片声音走后期轨）：
+
+```bash
+# 去头 1 帧
+ffmpeg -i 镜02.mp4 -vf "trim=start_frame=1,setpts=PTS-STARTPTS" -c:v libx264 -crf 18 -pix_fmt yuv420p -an 镜02_precise.mp4
+# 去尾（保留前 23 帧 → end_frame=23）
+ffmpeg -i 镜01.mp4 -vf "trim=end_frame=23,setpts=PTS-STARTPTS" -c:v libx264 -crf 18 -pix_fmt yuv420p -an 镜01_precise.mp4
+# 数帧核验（确认裁对了）
+ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of csv=p=0 镜01_precise.mp4
+```
+
+实测参考（30fps 1s 测试片）：copy 去尾 0.2s 实得 0.867s（偏差约 2 帧，属关键帧边界近似）；trim 去 1 帧实得 29 帧、保留 23 帧实得 23 帧，逐帧精确。
+
+**拼接（成集/成片）**：
+
+```bash
+# list.txt 每行一个文件（同一批生成参数一致时才能 -c copy 无损拼接）
+printf "file '镜01_cut.mp4'\nfile '镜02_cut.mp4'\n" > list.txt
+ffmpeg -f concat -safe 0 -i list.txt -c copy 成片.mp4
+```
+
+某段参数不同（分辨率/帧率不一致）时 `-c copy` 会拼接失败或花屏，该段单独重编码统一参数后再拼。拼接后建议抽尾帧核验实际结尾，并核对总时长。
+
+## 十、与现有文档的关系
 
 - 转场代码与情绪选用表（具体用哪个转场） → `agent-prompt.md`
 - 提示词作用域与末态法则 → `prompt-craft.md`
