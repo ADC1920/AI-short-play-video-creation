@@ -1,6 +1,6 @@
 ---
-name: ai-short-play-video
-version: 1.4.1
+name: ai-short-play-video-creation
+version: 1.4.2
 description: "AI 漫剧/动态漫短剧制作全流程技能。当用户要制作漫剧、AI 短剧、竖屏微短剧、动态漫画、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI comic-drama (motion comic) video production with Seedance / Jimeng: storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, face-check workarounds, storyboard frame craft, keyframe candidates, symptom-to-fix troubleshooting, multi-episode adaptation."
 ---
 
