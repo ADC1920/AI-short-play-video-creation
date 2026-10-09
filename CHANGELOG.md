@@ -1,4 +1,8 @@
-# CHANGELOG · manju-video
+# CHANGELOG · ai-short-play-video
+
+## 1.4.1 — 2026-10-09
+
+项目更名：manju-video → ai-short-play-video（技能名/目录名统一；GitHub 仓库更名为 AI-short-play-video）。功能内容与 v1.4.0 完全一致。
 
 ## 1.4.0 — 2026-10-09
 

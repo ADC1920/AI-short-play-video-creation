@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""宫格分镜 JSON 机检（manju-video 技能）。
+"""宫格分镜 JSON 机检（ai-short-play-video 技能）。
 
 校验宫格分镜智能体产出的 JSON 是否满足约束：
   C1 可解析的 JSON（容忍 ```json 围栏包裹；UTF-8/GBK 自动识别）

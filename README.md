@@ -1,4 +1,6 @@
-# manju-video · AI 漫剧制作技能
+# ai-short-play-video · AI 漫剧制作技能
+
+> 更名记录：2026-10-09 由 manju-video 更名；GitHub 仓库 = ADC1920/AI-short-play-video。
 
 把一句话剧情或完整剧本，变成可执行的漫剧（动态漫）视频工程：分镜蓝图、宫格分镜图、逐镜视频提示词一条龙。适用于 Claude Code / ZCode 等 Agent 的 Skill 机制（SKILL.md + 按需加载的 references）。
 
@@ -32,7 +34,7 @@
 
 ## 安装
 
-把 `manju-video/` 整个目录复制到 Agent 的技能根目录（如 `~/.agents/skills/` 或 `~/.claude/skills/`）。触发话术示例见 SKILL.md 的「触发示例」一节。
+把 `ai-short-play-video/` 整个目录复制到 Agent 的技能根目录（如 `~/.agents/skills/` 或 `~/.claude/skills/`）。触发话术示例见 SKILL.md 的「触发示例」一节。
 
 ## 脚本自检
 

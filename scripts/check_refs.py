@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""素材与 @ 引用核对（manju-video 技能）。
+"""素材与 @ 引用核对（ai-short-play-video 技能）。
 
 核对「@ 引用名」与素材目录文件名是否一致（技能铁律：@名称必须与素材名完全一致）。
 双向报告：

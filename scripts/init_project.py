@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""多集项目脚手架（manju-video 技能）。
+"""多集项目脚手架（ai-short-play-video 技能）。
 
 一键生成多集漫剧项目的标准结构：
     <项目>/
