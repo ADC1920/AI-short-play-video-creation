@@ -14,7 +14,7 @@
 | `references/frame-industrial.md` | 分镜图工艺：三层分离铁律、镜头级先图后视频、8 段式写法、非人形偏置对策、4 模选档、并发限流 |
 | `references/prompt-craft.md` | 提示词进阶：三作用域、末态法则、时间粒度、多素材绑定、模型实测档案 |
 | `references/transition-editing.md` | 衔接与后期：转场「剪辑做还是模型做」、编辑四件套、向前/向后延长、接龙 |
-| `references/continuity-log.md` | 连续性台账：连续性账 / Take 记录 / 提示词版本账（多集一致性管理） |
+| `references/continuity-log.md` | 连续性台账：连续性账 / 场景出场记录 / Take 记录 / 提示词版本账（多集一致性管理） |
 | `references/audio-voice.md` | 声音与配音：四轨设计、角色音色表、台词标注、Edge TTS 落地、混音检查 |
 | `references/jimeng-seedance-2.5.md` | 即梦 Seedance 2.5 规则与限制（CLI 实查）：能力规格、素材上限、积分参考、提示词规则、审核限制 |
 | `scripts/validate_storyboard.py` | 分镜 JSON 机检：数量 / 词数 / 字符上限 / 必含排除词（中英兼容）/ 禁用句式 / 编号重复 |
@@ -29,7 +29,7 @@
 - **路线 B 宫格分镜直生**：剧情一句话 → 分镜 JSON（可机检）→ 宫格分镜图 → 一张图直出 15s 连贯片段。
 - **路线 C 人脸审核规避五法**：人物参考图被人脸检测拦截时的五种替代方案，各带生成与使用提示词。
 
-另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`，含抽帧/裁剪/拼接的 ffmpeg 落地命令）、多集连续性台账（`references/continuity-log.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、即梦 Seedance 2.5 规则与限制（CLI 实查档案，`references/jimeng-seedance-2.5.md`）、故障首修表、首镜 2 秒钩子法则。
+另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构；写分镜前跑场景展示判断——首现交代/低频带出/高频直入）、多人戏调度四步预排（站位/走位/视线/轴线，`references/agent-prompt.md`）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`，含抽帧/裁剪/拼接的 ffmpeg 落地命令）、多集连续性台账（`references/continuity-log.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算 / 视觉验收纪律）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、即梦 Seedance 2.5 规则与限制（CLI 实查档案，`references/jimeng-seedance-2.5.md`）、故障首修表、首镜 2 秒钩子法则。
 
 ## 快速上手（最小示例）
 
