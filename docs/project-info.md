@@ -1,0 +1,49 @@
+# project-info · AI-short-play-video-creation（六节索引）
+
+> 本文件=工作区导航索引（索引式，不复制技能正文）。开工按「任务关键词 → 锚词 → 文件」定位再读，不盲扫全仓（细则 #275/#276）。
+
+## 一、架构
+
+技能包三段式：主入口 `SKILL.md`（触发示例 14 类 / 三路线决策 / 铁律与核心公式 / 平台硬约束 / 成本纪律 / 排障速查 / 多集工作流）→ `references/` 10 篇按需加载工艺文档 → `scripts/` 4 个工程脚本。数据流：用户素材（完整剧本 / 一句话梗概）→ 路线判定（A 分镜智能体 / B 宫格直生 / C 人脸规避）→ 分镜蓝图或宫格 JSON（`validate_storyboard.py` 机检）→ 素材锚点与 @ 引用（`check_refs.py` 核对）→ 逐镜生成 / 直生视频 → 衔接后期与配音。本工作区（git 仓库）为开发源；发布面=GitHub；使用面=本机技能实体（静态复制，手动同步）。
+
+## 二、目标
+
+把一句话剧情或完整剧本变成可执行的 AI 短剧视频（动态漫/漫剧、写实风等形态通用）；本工作区职责=开发、版本化、发布该技能（当前 v1.6.0）。
+
+## 三、模块表（关键词锚定列）
+
+| 模块 | 载体 | 关键词锚定（3-8） |
+|---|---|---|
+| 主入口/三路线 | `SKILL.md` | 触发示例、路线A/B/C、铁律、平台硬约束、排障速查、多集工作流、成本纪律、首镜2秒钩子 |
+| 分镜智能体（路线A） | `references/agent-prompt.md` | 系统提示词、镜号、时长、转场、声音设计、尾帧接力 |
+| 宫格分镜（路线B） | `references/grid-storyboard.md` | 4/6/9/25 宫格、分镜JSON、直生15s、拼图 |
+| 人脸审核规避（路线C） | `references/face-workarounds.md` | 墨镜遮挡、网格遮挡、无五官三视图、服装+头部、风格转绘 |
+| 素材一致性工艺 | `references/asset-workflow.md` | 人物锚点法、ref红线、候选图选择、重构图、首帧四要素 |
+| 分镜图工艺 | `references/frame-industrial.md` | 三层分离、8段式、4模选档、并发限流、非人形偏置 |
+| 提示词进阶 | `references/prompt-craft.md` | 三作用域、末态法则、时间粒度、多素材绑定、实测档案 |
+| 衔接与后期 | `references/transition-editing.md` | 转场做or剪、编辑四件套、延长、接龙、ffmpeg落地 |
+| 连续性台账 | `references/continuity-log.md` | 连续性账、Take记录、提示词版本账、证据分级 |
+| 声音与配音 | `references/audio-voice.md` | 四轨设计、角色音色表、Edge TTS、混音检查 |
+| 即梦实测档案 | `references/jimeng-seedance-2.5.md` | Seedance 2.5、素材上限、积分、提示词规则、审核限制 |
+| 分镜 JSON 机检 | `scripts/validate_storyboard.py` | 数量、词数、字符上限、排除词、编号重复 |
+| @引用核对 | `scripts/check_refs.py` | 断链引用、闲置素材、大小写 |
+| 多集脚手架 | `scripts/init_project.py` | 多集目录、幂等、扩容 |
+| 拼宫格 | `scripts/make_grid.py` | 拼图、4/6/9/25、Pillow、递归扫描 |
+
+## 四、调研导航
+
+- 本地唯一开发源：本工作区（git 仓库，main）；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation`（静态复制，落后时手动同步）。
+- 远程：https://github.com/ADC1920/AI-short-play-video-creation
+- 自测入口：`python scripts/<脚本>.py --selftest`（四件全过=基线）；平台硬约束与排障速查在 `SKILL.md`。
+- 平台实查档案：Seedance 2.5 规格=CLI 实查（`references/jimeng-seedance-2.5.md`，三层来源分级）；行为探测待跑项在该文件与 `prompt-craft.md` 的待办清单。
+
+## 五、参考资源
+
+- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.6.0，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
+- `README.md`：技能结构表、安装指引（克隆或复制到技能根目录）、脚本自检命令。
+- `memory/agent-log.md`：会话留档（本地，不入库）。
+- `AGENTS.md`：项目级规则（本文件的上游指针）。
+
+## 六、复述确认
+
+一句话：本工作区是「AI 短剧创作工作流」技能的开发源与承载根——技能本体随 GitHub 仓库发布，本地留档走 memory/agent-log.md，本机技能实体（.agents/skills）是需手动同步的静态副本。

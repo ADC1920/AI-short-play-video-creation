@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# 本地工作承载（会话留档，不随公开仓库发布）
+memory/
