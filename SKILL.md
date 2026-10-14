@@ -1,6 +1,6 @@
 ---
 name: ai-short-play-video-creation
-version: 1.7.0
+version: 1.7.1
 description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、多人戏调度/站位轴线/对话戏机位、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, multi-character blocking & axis, scene first-appearance staging, visual acceptance discipline, face-check workarounds, storyboard frame craft, keyframe candidates, symptom-to-fix troubleshooting, multi-episode adaptation."
 ---
 
@@ -106,6 +106,7 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - **重生预算**：单集重生段数控制在 ~10% 以内；超了停下检查素材与提示词的系统性问题，别硬刷。
 - **批量/付费动作前与用户确认**：批量提交、整集生成、扩大规模前先确认（先出 1–2 镜样片给用户看）。
 - **视觉验收纪律（防假验收）**：未实际查看生成的图/视频，不得声称视觉验收通过——文件有效（JSON 过机检、文件存在、能打开、拼接命令 exit 0）不能替代视觉去看。实际结果逐镜检查：写实形态查身份/肤质/光影/手指，动画形态查造型/头身比/线条/色板/人数；发现问题给具体的重生成提示词，不改口说没问题。剧本侧同理：只声称读过实际读到的部分。
+- **交付版本管理（旧版自动归档）**：docx 成品交付（剧本/脚本/方案等一切文档）遵循「当前版在交付根目录、旧版在归档子目录」；每次新版交付后把旧版移入 `<交付路径>/_旧版归档/`（移动非删除、可回滚，不主动删除旧版），纳入交付固定流程——执行 `python scripts/archive_old_docx.py <交付路径> "<当前版文件名.docx>" [更多保留名] [--dry-run]`（`--selftest` 自检）；多版本长交付项目（逐镜脚本、多集剧本等）一律启用。
 
 ## 排障速查（生成结果不对时先查这里）
 
