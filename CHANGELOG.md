@@ -1,5 +1,14 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.9.2 — 2026-10-14
+
+收尾补件（审计发现项落地）：
+
+- **新增 `scripts/sync_entity.py`**——技能实体同步一键化：安全检查（源须为技能根、目标须为技能实体，拒绝误指路径）→ 差异扫描（新增/更新/相同/目标多余）→ 备份（时间戳快照，失败即中止）→ 同步（默认只发新增与更新，`--prune` 才清多余）→ md5 复核；`--dry-run` 预演。排除承载与仓库级资产（AGENTS.md/docs/memory/.github/examples/.git，列表维护在脚本顶部常量）。selftest 覆盖全路径（开发中修复两处：根级排除失效、同秒备份重名）。
+- **脚本索引补录**：`SKILL.md` / `README.md` 脚本表补录 `archive_old_docx.py`（v1.7.1 加入时遗漏）与 `sync_entity.py`。
+- **README 补「样例与自动检查」指引**：`examples/demo-multi-ep/` 与 GitHub Actions 的说明与试跑命令。
+- **六脚本口径同步**：`AGENTS.md`（验证基线 + 实体同步面改为工具化口径）、`docs/project-info.md`（架构计数 / 模块表 / 自测入口 / 版本号）、CI 工作流（自检循环加入 `sync_entity`）。
+
 ## 1.9.1 — 2026-10-14
 
 融合尾部同步与工程优化（v1.8/v1.9 两轮生态融合的收尾 + 规范化）：

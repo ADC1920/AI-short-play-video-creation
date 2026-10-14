@@ -15,10 +15,10 @@ jobs:
           python-version: "3.12"
       - name: Install deps
         run: pip install pillow
-      - name: Selftests (five scripts)
+      - name: Selftests (six scripts)
         run: |
           set -e
-          for s in validate_storyboard check_refs init_project make_grid archive_old_docx; do
+          for s in validate_storyboard check_refs init_project make_grid archive_old_docx sync_entity; do
             echo "== $s =="
             python "scripts/$s.py" --selftest
           done

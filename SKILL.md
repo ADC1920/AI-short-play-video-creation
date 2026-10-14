@@ -1,6 +1,6 @@
 ---
 name: ai-short-play-video-creation
-version: 1.9.1
+version: 1.9.2
 description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目、连续性台账、段缝衔接、转场（剪辑做还是模型做）、视频编辑/延长、配音/旁白/TTS/音色、BGM 卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、微表情/面部表演、打戏/动作段、情绪节拍与开场钩子、多人戏调度/站位轴线、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出系统提示词、工程级分镜蓝图、排障速查与操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition & editing, dubbing, continuity ledgers, segment-seam continuity, blocking & axis, scene staging, FACS micro-expression, action previs, emotional beats & hooks, face-check workarounds, negative-prompt workarounds, troubleshooting, multi-episode adaptation."
 license: MIT
 ---
@@ -164,6 +164,8 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `scripts/make_grid.py` | 本地拼宫格（4/6/9/25：`--cols 2/3/5`），替代在线拼图工具 |
 | `scripts/check_refs.py` | 素材与引用核对：@引用名 vs `素材/` 文件名——断链引用（Error）/ 待补标注（Warning）/ 闲置素材（Warning）；`--bindings` 多素材绑定自检 |
 | `scripts/init_project.py` | 多集项目脚手架：一键生成「根 `素材/` + 各集三件目录」结构 |
+| `scripts/archive_old_docx.py` | docx 交付版本管理：旧版自动移入 `_旧版归档/`（保留清单 / `--dry-run` 预览 / 占用容错） |
+| `scripts/sync_entity.py` | 技能实体同步：备份 → 差异扫描 → 同步 → md5 复核一条链（`--dry-run` 预演 / `--prune` 清多余） |
 
 ## 更新记录
 
@@ -183,3 +185,4 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - 2026-10-14 v1.8.0 生态融合（第一批+第二批，调研档 `docs/ecosystem-survey-2026-10.md` 第七节路线）：①机检扩充——`scripts/validate_storyboard.py` 新增 C8 否定式高关联约束 / C9 并列主体句式 / C10 抽象过程形态词三条告警检查 + 门日志与 `--stats` 汇总（哪道检查最常响=最该改措辞）；②引用核对升级——`scripts/check_refs.py` 断链区分「显式待补」（行内标注待补→降级为警告）+ `--bindings` 多素材绑定自检；③段缝衔接——`references/continuity-log.md` 新增第五节（三方案：末态双保险/换机位硬切/空镜过渡；接续状态末帧画面纪律），`transition-editing.md` 补集间延长衔接用法；④否定失效三改法——`references/prompt-craft.md` 新增第七节（词根敏感性/换词/主体优先句式/触发器移除/栏目纪律）；⑤前置锁定与交付纪律——平台硬约束补「先锁两件再动笔」、成本纪律补「交付形态先定、按名交付」；⑥复测判定——`references/jimeng-seedance-2.5.md` 行为复测判定节（reproduced/degraded/failed + 样本数）；排障表 2 行（否定失效/段缝衔接）；description 补触发词；README 同步。
 - 2026-10-14 v1.9.0 生态融合（第三批·新模块，调研档第七节路线）：①面部表演工艺——新增 `references/facs-micro-expression.md`（FACS 四区写法、真假笑、强度三档与起-hold-落、常用情绪配方、结果词禁令与投喂翻译纪律）；②情绪节拍与开场钩子——新增 `references/emotion-beat-curve.md`（12 节拍情绪曲线体检表 + 三条判定 + 钩子模式库 + 2 秒结构模板）；③打戏预演——新增 `references/action-previs.md`（R1-R3 强度档 / 15 秒完播结构 / 11 环动力链 / 镜头五要素 / 防守三态 / 物理反馈分级）；④后期工具路线对照（`transition-editing.md`）：ffmpeg 与剪映草稿路线的适用边界与去重提示；description 补触发词（微表情/打戏/情绪节拍/开场钩子）；README 与索引表同步。
 - 2026-10-14 v1.9.1 融合尾部同步与工程优化：①触发示例补 5 类新能力话术（段缝衔接/微表情/打戏/情绪钩子/否定失效，16→21 类）；②description 精简至 1024 字符规范内、front-matter 补 `license: MIT` 字段；③`references/agent-prompt.md` 轻度同步——序列自检补四项（段缝衔接/表演真实/约束有效性/打戏段）、写法说明区补三条新工艺指针；④新增 GitHub Actions CI（五脚本 selftest + 样例项目端到端回归）；⑤新增 `examples/demo-multi-ep/` 样例项目（质量基准与回归夹具，不入实体）；⑥`validate_storyboard.py` 门日志加行数轮转（默认 2000 行上限，防无限增长）。
+- 2026-10-14 v1.9.2 收尾补件：①新增 `scripts/sync_entity.py`——技能实体同步一键化（安全检查 → 差异扫描 → 备份 → 同步 → md5 复核；`--dry-run` 预演 / `--prune` 清多余；排除承载与仓库级资产，列表维护在脚本顶部常量），selftest 覆盖全路径（含排除根级文件与备份防重名两处修复）；②脚本索引表补录 `archive_old_docx.py`（v1.7.1 加入时遗漏）与 `sync_entity.py`；③README 补「样例与自动检查」指引（examples 与 CI）；④AGENTS/project-info/CI/CHANGELOG 六脚本口径同步。

@@ -4,11 +4,11 @@
 
 ## 一、架构
 
-技能包三段式：主入口 `SKILL.md`（触发示例 21 类 / 三路线决策 / 铁律与核心公式 / 平台硬约束 / 成本纪律 / 排障速查 / 多集工作流）→ `references/` 13 篇按需加载工艺文档 → `scripts/` 5 个工程脚本。数据流：用户素材（完整剧本 / 一句话梗概）→ 路线判定（A 分镜智能体 / B 宫格直生 / C 人脸规避）→ 分镜蓝图或宫格 JSON（`validate_storyboard.py` 机检）→ 素材锚点与 @ 引用（`check_refs.py` 核对）→ 逐镜生成 / 直生视频 → 衔接后期与配音。本工作区（git 仓库）为开发源；发布面=GitHub；使用面=本机技能实体（静态复制，手动同步）。
+技能包三段式：主入口 `SKILL.md`（触发示例 21 类 / 三路线决策 / 铁律与核心公式 / 平台硬约束 / 成本纪律 / 排障速查 / 多集工作流）→ `references/` 13 篇按需加载工艺文档 → `scripts/` 6 个工程脚本。数据流：用户素材（完整剧本 / 一句话梗概）→ 路线判定（A 分镜智能体 / B 宫格直生 / C 人脸规避）→ 分镜蓝图或宫格 JSON（`validate_storyboard.py` 机检）→ 素材锚点与 @ 引用（`check_refs.py` 核对）→ 逐镜生成 / 直生视频 → 衔接后期与配音。本工作区（git 仓库）为开发源；发布面=GitHub；使用面=本机技能实体（静态复制，`scripts/sync_entity.py` 一键同步）。
 
 ## 二、目标
 
-把一句话剧情或完整剧本变成可执行的 AI 短剧视频（动态漫/漫剧、写实风等形态通用）；本工作区职责=开发、版本化、发布该技能（当前 v1.9.1）。
+把一句话剧情或完整剧本变成可执行的 AI 短剧视频（动态漫/漫剧、写实风等形态通用）；本工作区职责=开发、版本化、发布该技能（当前 v1.9.2）。
 
 ## 三、模块表（关键词锚定列）
 
@@ -33,17 +33,18 @@
 | 多集脚手架 | `scripts/init_project.py` | 多集目录、幂等、扩容 |
 | 拼宫格 | `scripts/make_grid.py` | 拼图、4/6/9/25、Pillow、递归扫描 |
 | 旧版归档 | `scripts/archive_old_docx.py` | 交付版本管理、_旧版归档、dry-run、selftest |
+| 实体同步 | `scripts/sync_entity.py` | 备份、差异扫描、md5 复核、dry-run、prune |
 
 ## 四、调研导航
 
 - 本地唯一开发源：本工作区（git 仓库，main）；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation`（静态复制，落后时手动同步）。
 - 远程：https://github.com/ADC1920/AI-short-play-video-creation
-- 自测入口：`python scripts/<脚本>.py --selftest`（五件全过=基线）；CI 在 push 时自动跑五件 + `examples/demo-multi-ep/` 端到端回归；平台硬约束与排障速查在 `SKILL.md`。
+- 自测入口：`python scripts/<脚本>.py --selftest`（六件全过=基线）；CI 在 push 时自动跑六件 + `examples/demo-multi-ep/` 端到端回归；平台硬约束与排障速查在 `SKILL.md`。
 - 平台实查档案：Seedance 2.5 规格=CLI 实查（`references/jimeng-seedance-2.5.md`，三层来源分级）；行为探测待跑项在该文件与 `prompt-craft.md` 的待办清单。
 
 ## 五、参考资源
 
-- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.9.1，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
+- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.9.2，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
 - `README.md`：技能结构表、安装指引（克隆或复制到技能根目录）、脚本自检命令。
 - `memory/agent-log.md`：会话留档（本地，不入库）。
 - `AGENTS.md`：项目级规则（本文件的上游指针）。
