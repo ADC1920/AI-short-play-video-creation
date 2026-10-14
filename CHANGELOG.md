@@ -1,5 +1,17 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.9.1 — 2026-10-14
+
+融合尾部同步与工程优化（v1.8/v1.9 两轮生态融合的收尾 + 规范化）：
+
+- **触发示例补 5 类新能力话术**（`SKILL.md`，16→21 类）：段缝衔接生硬、微表情/表情崩、打戏/动作段设计、情绪节奏与开场留人、否定失效（写了不要还出现）。
+- **description 精简**至 1024 字符规范内；front-matter 补 `license: MIT` 字段。
+- **路线 A 系统提示词轻度同步**（`references/agent-prompt.md`）：序列自检新增四项（段缝衔接 / 表演真实 / 约束有效性 / 打戏段），写法说明区补三条新工艺指针（情绪定位 / 表情写法 / 打戏段）。
+- **GitHub Actions CI**（`.github/workflows/selftest.yml`）：push / PR 自动跑五脚本 selftest + `examples/demo-multi-ep/` 端到端回归。
+- **新增 `examples/demo-multi-ep/` 样例项目**：最小多集结构（素材 + 剧本 + 分镜 JSON），作快速上手参照与回归夹具（仓库级质量资产，不入技能实体）。
+- **门日志轮转**（`scripts/validate_storyboard.py`）：`.gate-log.jsonl` 超 2000 行自动轮转保留最近一半，防长项目无限增长；selftest 新增轮转用例。
+- 索引一致性同步：`AGENTS.md` 验证基线（四脚本→五脚本 + CI）、`docs/project-info.md` 全面刷新（架构计数 / 模块表补 3 个新档 / 版本号 / 自测入口）。
+
 ## 1.9.0 — 2026-10-14
 
 GitHub 生态调研（2026-10）第七节路线第三批·新模块融合。来源项目：manju-laoli-skill（FACS 引擎 / 情绪曲线 / 打戏动力学）、higgsfield-seedance2-jineng（短视频钩子框架）——理念级改写，分值与模式为自检参考，证据边界在各文档内标注：

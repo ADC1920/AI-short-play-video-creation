@@ -18,7 +18,8 @@ C8/C9/C10 为告警级经验检查，来源见 `references/prompt-craft.md`「�
 （实测词表，单例性质——命中不等于必错，按提示改写或忽略）。
 
 门失败统计：每次校验默认把结果追加到目标文件同目录的 `.gate-log.jsonl`
-（`--no-log` 关闭；`--stats` 汇总「哪道检查最常响」；`--log-file` 指定路径；写不进去静默跳过）。
+（`--no-log` 关闭；`--stats` 汇总「哪道检查最常响」；`--log-file` 指定路径；写不进去静默跳过；
+超过上限自动轮转，保留最近一半记录）。
 
 用法:
     python validate_storyboard.py <story.json> [--n 25|9|6|4] [--max-chars 1500] [--no-log]
@@ -45,6 +46,7 @@ DEFAULT_MAX_CHARS = 1500
 CJK_SKIP_RATIO = 0.3  # 中文占比超过此值视为中文提示词，跳过英文词数检查
 LAYOUT_N = {"5x5": 25, "3x3": 9, "2x2": 4, "2x3": 6, "3x2": 6}
 GATE_LOG_NAME = ".gate-log.jsonl"
+GATE_LOG_MAX_LINES = 2000  # 门日志上限，超过时截去前一半（保留最近记录）
 
 # C8：否定式高关联约束。视频模型对否定不敏感、对词根敏感——被禁词根留在提示词里会被当画面词渲染。
 # 词表与判据来源：同业实测（manju-laoli-skill，单例性质），只覆盖「光效/表情/空镜」三类高关联概念；
@@ -167,8 +169,13 @@ def check(data, expect_n, max_chars=DEFAULT_MAX_CHARS):
 
 
 def append_gate_log(log_path, file_label, data, errors, warnings, hits):
-    """把本次校验结果追加到门日志（写不进去静默跳过，不影响校验）。"""
+    """把本次校验结果追加到门日志（写不进去静默跳过，不影响校验）；超上限先轮转（保留最近一半）。"""
     try:
+        p = Path(log_path)
+        if p.is_file():
+            lines = p.read_text(encoding="utf-8").splitlines()
+            if len(lines) >= GATE_LOG_MAX_LINES:
+                p.write_text("\n".join(lines[GATE_LOG_MAX_LINES // 2:]) + "\n", encoding="utf-8")
         rec = {
             "ts": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "file": file_label,
@@ -212,6 +219,7 @@ def print_stats(log_path):
 
 
 def selftest():
+    global GATE_LOG_MAX_LINES
     good_prompt = ("Medium Shot, the woman from image_1.png grips her sword tightly, "
                    "intense expression, snow background, cinematic lighting, "
                    "no timecode, no subtitles.")
@@ -276,6 +284,17 @@ def selftest():
         rec = json.loads(text.splitlines()[0])
         assert rec["hits"].get("C8", 0) >= 1 and rec["file"] == "sb.json", f"门日志字段异常: {rec}"
         assert print_stats(log) == 0, "stats 读取失败"
+        # 门日志轮转：上限调小验证（保留最近一半）
+        old_max = GATE_LOG_MAX_LINES
+        try:
+            GATE_LOG_MAX_LINES = 3
+            rot = Path(tmp) / "rot.jsonl"
+            for _ in range(6):
+                append_gate_log(rot, "f.json", neg, errs, warns, hits)
+            n = len(rot.read_text(encoding="utf-8").splitlines())
+            assert n <= 3, f"门日志轮转未生效: {n} 行"
+        finally:
+            GATE_LOG_MAX_LINES = old_max
         missing = print_stats(Path(tmp) / "不存在.jsonl")
         assert missing == 0, "stats 缺文件路径异常"
     print("selftest PASS（英文正例 0 错；中文正例 0 错且词数跳过；负例抓到 %d 错；编号重复检出；超长告警；"
