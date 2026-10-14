@@ -40,7 +40,7 @@
 
 ## 五、参考资源
 
-- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.7.1，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
+- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.7.2，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
 - `README.md`：技能结构表、安装指引（克隆或复制到技能根目录）、脚本自检命令。
 - `memory/agent-log.md`：会话留档（本地，不入库）。
 - `AGENTS.md`：项目级规则（本文件的上游指针）。
