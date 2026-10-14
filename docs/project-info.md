@@ -30,7 +30,6 @@
 | 多集脚手架 | `scripts/init_project.py` | 多集目录、幂等、扩容 |
 | 拼宫格 | `scripts/make_grid.py` | 拼图、4/6/9/25、Pillow、递归扫描 |
 | 旧版归档 | `scripts/archive_old_docx.py` | 交付版本管理、_旧版归档、dry-run、selftest |
-| 实践运行档案 | `docs/field-notes-runway-video-project.md` | 走秀视频、雾端掩护、五机位、顺序式时序、时长分档、实测教训（脱敏） |
 
 ## 四、调研导航
 
