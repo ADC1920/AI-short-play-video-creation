@@ -16,7 +16,7 @@
 - **仓库定位**：公开技能仓库——发布物=技能本体（`SKILL.md` / `references/` / `scripts/` / `README.md` / `CHANGELOG.md` / `LICENSE`）；`memory/` 为本地承载（已从版本控制排除），`docs/` 为开发导航。
 - **版本与提交**：版本号落 `CHANGELOG.md`（SKILL.md front-matter `version` 同步）；提交遵守仓库惯例 `<类型>(<范围>):〈动词开头描述〉`（如 `feat(skill): v1.6.0 …`，类型前缀跟随历史 feat/fix/docs/refactor/chore）；push=对外发布（L3，须用户确认）。
 - **验证基线**：改动技能后跑四脚本自检 `python scripts/validate_storyboard.py --selftest`（另三件 check_refs/init_project/make_grid 同法）全过再提交；`make_grid.py` 需 Pillow。
-- **技能实体同步面**：本工作区=开发源；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation` 为静态复制（非 git），发版后需手动同步（先备份；回滚点落 `~\.agents\skill-backups\`）。同步口径=技能面文件（SKILL.md/references/scripts/README/CHANGELOG/LICENSE/.git*）；承载文件（AGENTS.md/docs/memory）不入实体。已于 2026-10-14 同步至 v1.7.2（v1.7.0 → v1.7.2，含 md5 全量核对）。
+- **技能实体同步面**：本工作区=开发源；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation` 为静态复制（非 git），发版后需手动同步（先备份；回滚点落 `~\.agents\skill-backups\`）。同步口径=技能面文件（SKILL.md/references/scripts/README/CHANGELOG/LICENSE/.git*）；承载文件（AGENTS.md/docs/memory）不入实体。已于 2026-10-14 同步至 v1.9.0（v1.7.2 → v1.9.0，含 md5 全量核对）。
 - 权威源顺序：注入核心 → shisan-xinuo-workflow SKILL.md → 本文件 → `docs/project-info.md`。
 
 ## 项目承载（已就绪）
