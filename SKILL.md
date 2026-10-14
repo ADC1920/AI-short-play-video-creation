@@ -1,7 +1,7 @@
 ---
 name: ai-short-play-video-creation
-version: 1.7.2
-description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、多人戏调度/站位轴线/对话戏机位、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, multi-character blocking & axis, scene first-appearance staging, visual acceptance discipline, face-check workarounds, storyboard frame craft, keyframe candidates, symptom-to-fix troubleshooting, multi-episode adaptation."
+version: 1.8.0
+description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、段缝衔接/多段衔接生硬、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、多人戏调度/站位轴线/对话戏机位、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, segment-seam continuity, multi-character blocking & axis, scene first-appearance staging, visual acceptance discipline, face-check workarounds, storyboard frame craft, keyframe candidates, negative-prompt failure workarounds, symptom-to-fix troubleshooting, multi-episode adaptation."
 ---
 
 # AI 短剧创作工作流（Seedance 出片）
@@ -85,6 +85,8 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 
 ## 平台硬约束（写蓝图前先核对）
 
+**先锁两件再动笔**：目标模型版本（2.0 / 2.5——两版契约不同：时长上限、参考图规则、首尾帧有无、声音符号，禁混写）与画幅（竖/横，开剧一次定、全剧贯通）。用户未指定时一次问全再动笔，不默认选版、不中途换版。
+
 | 约束 | 口径（2.0 实测为主；2.5 已 CLI 实查，详见 `references/jimeng-seedance-2.5.md`） |
 |---|---|
 | 参考图 | 2.0：≤9 张/次（人物 + 场景合计，最重要的放前面）；同框 ref ≤2，红线和替代法见 `references/asset-workflow.md`。2.5（CLI 实查 2026-10-10）：图 ≤30 / 视频 ≤10 / 音频 ≤10、素材总量 ≤50；多视图主体参考须拆单角度单图（一图一人，可作身份参考） |
@@ -105,6 +107,7 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - **逐集解锁**：多集项目一集一集产出确认，不一次全量生成；先出高曝光镜头样片验证风格，再批量。
 - **重生预算**：单集重生段数控制在 ~10% 以内；超了停下检查素材与提示词的系统性问题，别硬刷。
 - **批量/付费动作前与用户确认**：批量提交、整集生成、扩大规模前先确认（先出 1–2 镜样片给用户看）。
+- **交付形态先定、按名交付**：「只要提示词 / 只要分镜 / 只诊断 / 按原结构改写」是输出约束——只交付被点名的成品，不代做下游、不夹带修改未点名的文件。缺失的次要参数用**标注默认**补齐（普通新片无时长按 15s、画幅无指定按 9:16，均注明「补充默认」）；只有真歧义（素材身份、编辑目标、延长方向）才提问，且一次问全。
 - **视觉验收纪律（防假验收）**：未实际查看生成的图/视频，不得声称视觉验收通过——文件有效（JSON 过机检、文件存在、能打开、拼接命令 exit 0）不能替代视觉去看。实际结果逐镜检查：写实形态查身份/肤质/光影/手指，动画形态查造型/头身比/线条/色板/人数；发现问题给具体的重生成提示词，不改口说没问题。剧本侧同理：只声称读过实际读到的部分。
 - **交付版本管理（旧版自动归档）**：docx 成品交付（剧本/脚本/方案等一切文档）遵循「当前版在交付根目录、旧版在归档子目录」；每次新版交付后把旧版移入 `<交付路径>/_旧版归档/`（移动非删除、可回滚，不主动删除旧版），纳入交付固定流程——执行 `python scripts/archive_old_docx.py <交付路径> "<当前版文件名.docx>" [更多保留名] [--dry-run]`（`--selftest` 自检）；多版本长交付项目（逐镜脚本、多集剧本等）一律启用。
 
@@ -129,6 +132,8 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | 画面文字乱码/叠字 | 必要文字显式声明 `clear legible Chinese characters「XX」, no garbled text`；弹幕只写 1 处出现+滚动描述，写 N 次会画出 N 个；小字/枚举列表易错（只画一部分）——重要文字走后期 |
 | 拍点整体偏晚/镜头被跳过 | 时序偏晚约 2s：把拍点写早或改用「阶段+末态」分段；15s 内状态变化超 4 个会整段跳过——缩短每段或拆成多次请求 |
 | 写明的运镜被忽略 | 把该运镜改写成这一镜的**主要意图**（而不是并列描述之一），或接受结果重新构图 |
+| 写了「不要 X / 不出现 X」，X 照样出现 | 否定失效：被禁词根（光效/表情/空镜这类高关联概念）留在提示词里就会被当画面词渲染——按「否定失效三改法」换词（词根零出现）/ 主体优先句式 / 移除触发器（见 `references/prompt-craft.md`） |
+| 多段生成的段间衔接生硬、人物消失又出现 | 段缝连续性：模型每段零记忆，段缝不设计必跳——给每段【接续状态】写具体末帧画面，并按「段缝衔接三方案」选衔接方式（末态双保险 / 换机位硬切 / 空镜过渡，见 `references/continuity-log.md`） |
 | 想改已有视频局部/加长 | 编辑与延长有专门写法（唯一母版/范围写两遍/末态衔接），见 `references/transition-editing.md`；「禁止硬切」只在延长续写场景开 |
 | 成片声音不对（配音/音乐/音量） | 四轨设计与音色表见 `references/audio-voice.md`；台词清晰度要求高走后期 TTS，氛围音用模型原生 |
 
@@ -141,14 +146,14 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `references/face-workarounds.md` | 人物参考图被人脸审核拦截、或用户主动问怎么绕人脸限制时 |
 | `references/asset-workflow.md` | 做人物/场景素材时；保角色一致性时（锚点法 / ref 数量红线 / 候选图选择 / 把关清单 / 文字入图规则 / ref 库规模标准） |
 | `references/frame-industrial.md` | 出每镜关键帧时；三层工艺分离 / 8 段式写法 / 非人形主角偏置对策 / 4 模选档 / 长提示词并发限流 |
-| `references/prompt-craft.md` | 提示词打不准/漂移时；多素材绑定、作用域与末态法则、时间粒度、模型实测档案 |
-| `references/transition-editing.md` | 规划转场（剪辑做还是模型做）、编辑已有视频、向前/向后延长、接龙 |
-| `references/continuity-log.md` | 多集项目一致性管理：连续性账 / Take 记录 / 提示词版本账 / 证据分级 |
+| `references/prompt-craft.md` | 提示词打不准/漂移时；多素材绑定、作用域与末态法则、时间粒度、否定失效三改法、模型实测档案 |
+| `references/transition-editing.md` | 规划转场（剪辑做还是模型做）、编辑已有视频、向前/向后延长、集间延长衔接、接龙 |
+| `references/continuity-log.md` | 多集项目一致性管理：连续性账 / 段缝衔接 / Take 记录 / 提示词版本账 / 证据分级 |
 | `references/audio-voice.md` | 配音/旁白/BGM/音效设计：四轨规划、角色音色表、台词标注公式、Edge TTS 落地、混音检查 |
-| `references/jimeng-seedance-2.5.md` | 用即梦 Seedance 2.5 出片前：能力规格、素材上限、积分参考、提示词规则、审核限制（CLI 实查档案） |
-| `scripts/validate_storyboard.py` | 宫格分镜 JSON 产出后机检（数量/词数/字符数上限/必含排除词中英兼容/禁用句式/编号重复） |
+| `references/jimeng-seedance-2.5.md` | 用即梦 Seedance 2.5 出片前：能力规格、素材上限、积分参考、提示词规则、审核限制、复测判定（CLI 实查档案） |
+| `scripts/validate_storyboard.py` | 宫格分镜 JSON 产出后机检（数量/词数/字符上限/必含排除词/禁用句式/编号重复/否定词根·并列主体·抽象形态告警）；门日志 `--stats` 汇总「哪道检查最常响」 |
 | `scripts/make_grid.py` | 本地拼宫格（4/6/9/25：`--cols 2/3/5`），替代在线拼图工具 |
-| `scripts/check_refs.py` | 素材与引用核对：@引用名 vs `素材/` 文件名——断链引用（Error）与闲置素材（Warning）双向报告 |
+| `scripts/check_refs.py` | 素材与引用核对：@引用名 vs `素材/` 文件名——断链引用（Error）/ 待补标注（Warning）/ 闲置素材（Warning）；`--bindings` 多素材绑定自检 |
 | `scripts/init_project.py` | 多集项目脚手架：一键生成「根 `素材/` + 各集三件目录」结构 |
 
 ## 更新记录
@@ -166,3 +171,4 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - 2026-10-09 v1.5.1 定位说明修正（技能名不变）：技能说明从「漫剧制作技能」修正为「AI 短剧创作工作流」——本技能覆盖动态漫/漫剧、写实风等全部短剧形态，并非仅漫剧；路线 A 更名「分镜智能体」（原「漫剧智能体」）；画幅表述「漫剧投放主流」→「短剧投放主流」；description 中英双语同步改写。技能名/目录名/GitHub 仓库名保持 ai-short-play-video-creation 不变。
 - 2026-10-10 v1.6.0 即梦 Seedance 2.5 实查收录：新增 `references/jimeng-seedance-2.5.md`（CLI 实查：能力规格 / 素材上限 / 积分参考 / 提示词规则 / 审核限制，含三层来源分级与时效注明）；平台硬约束表 2.5 口径由「发布材料未实测」升级为「CLI 实查」（参考图 ≤30、时长 4–30s、分辨率至 1080p、提示词上限 15000）；`references/prompt-craft.md` 的 2.5 段规格回填、行为四探测标注为待跑；`references/asset-workflow.md` 新增「真人素材作首帧：重构图规范」（首帧四要素 / 重构图工序 / 验收三查）。
 - 2026-10-12 v1.7.0 同业技能实践吸收（三块）：①多人戏调度——铁律区新增预排四步（俯视站位/走位链/视线目标/反打检查），`references/agent-prompt.md` 系统提示词新增「多人场景预排」节与自检补项；②场景展示判断——多集工作流新增三分法（首现交代/低频带出/高频直入），`references/continuity-log.md` 新增「场景出场记录」节与记录表；③验收与接收纪律——成本纪律新增「视觉验收纪律」（文件有效不替代视觉验收、按形态逐镜检查、只声称读过实际读到的部分），多集工作流分集补「已读范围」纪律；触发示例扩至 16 类，description 补触发词。
+- 2026-10-14 v1.8.0 生态融合（第一批+第二批，调研档 `docs/ecosystem-survey-2026-10.md` 第七节路线）：①机检扩充——`scripts/validate_storyboard.py` 新增 C8 否定式高关联约束 / C9 并列主体句式 / C10 抽象过程形态词三条告警检查 + 门日志与 `--stats` 汇总（哪道检查最常响=最该改措辞）；②引用核对升级——`scripts/check_refs.py` 断链区分「显式待补」（行内标注待补→降级为警告）+ `--bindings` 多素材绑定自检；③段缝衔接——`references/continuity-log.md` 新增第五节（三方案：末态双保险/换机位硬切/空镜过渡；接续状态末帧画面纪律），`transition-editing.md` 补集间延长衔接用法；④否定失效三改法——`references/prompt-craft.md` 新增第七节（词根敏感性/换词/主体优先句式/触发器移除/栏目纪律）；⑤前置锁定与交付纪律——平台硬约束补「先锁两件再动笔」、成本纪律补「交付形态先定、按名交付」；⑥复测判定——`references/jimeng-seedance-2.5.md` 行为复测判定节（reproduced/degraded/failed + 样本数）；排障表 2 行（否定失效/段缝衔接）；description 补触发词；README 同步。
