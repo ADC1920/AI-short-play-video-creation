@@ -1,7 +1,7 @@
 ---
 name: ai-short-play-video-creation
-version: 1.8.0
-description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、段缝衔接/多段衔接生硬、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、多人戏调度/站位轴线/对话戏机位、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, segment-seam continuity, multi-character blocking & axis, scene first-appearance staging, visual acceptance discipline, face-check workarounds, storyboard frame craft, keyframe candidates, negative-prompt failure workarounds, symptom-to-fix troubleshooting, multi-episode adaptation."
+version: 1.9.0
+description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目初始化、连续性台账、段缝衔接/多段衔接生硬、转场（剪辑做还是模型做）、视频编辑、视频延长、配音、旁白、TTS、音色、BGM、卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、微表情/面部表演、打戏/动作段设计、情绪节拍与开场钩子、多人戏调度/站位轴线/对话戏机位、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接连贯时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出可直接粘贴使用的系统提示词、工程级分镜蓝图、排障速查与逐步操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition routing, video editing & extension, dubbing & voice design, continuity ledgers, segment-seam continuity, multi-character blocking & axis, scene first-appearance staging, FACS micro-expression craft, action & fight previs, emotional beat design, opening hooks, visual acceptance discipline, face-check workarounds, storyboard frame craft, keyframe candidates, negative-prompt failure workarounds, symptom-to-fix troubleshooting, multi-episode adaptation."
 ---
 
 # AI 短剧创作工作流（Seedance 出片）
@@ -151,6 +151,9 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `references/continuity-log.md` | 多集项目一致性管理：连续性账 / 段缝衔接 / Take 记录 / 提示词版本账 / 证据分级 |
 | `references/audio-voice.md` | 配音/旁白/BGM/音效设计：四轨规划、角色音色表、台词标注公式、Edge TTS 落地、混音检查 |
 | `references/jimeng-seedance-2.5.md` | 用即梦 Seedance 2.5 出片前：能力规格、素材上限、积分参考、提示词规则、审核限制、复测判定（CLI 实查档案） |
+| `references/facs-micro-expression.md` | 写实形态表情写不准、角色表情反复崩时；微表情四区写法、真假笑、强度三档、常用情绪配方 |
+| `references/emotion-beat-curve.md` | 分镜前给剧本做情绪体检、规划开场钩子时；12 节拍曲线、钩子模式库、2 秒结构模板 |
+| `references/action-previs.md` | 写打戏/动作段时；强度三档（R1-R3）、15 秒结构、11 环动力链、镜头五要素、防守三态 |
 | `scripts/validate_storyboard.py` | 宫格分镜 JSON 产出后机检（数量/词数/字符上限/必含排除词/禁用句式/编号重复/否定词根·并列主体·抽象形态告警）；门日志 `--stats` 汇总「哪道检查最常响」 |
 | `scripts/make_grid.py` | 本地拼宫格（4/6/9/25：`--cols 2/3/5`），替代在线拼图工具 |
 | `scripts/check_refs.py` | 素材与引用核对：@引用名 vs `素材/` 文件名——断链引用（Error）/ 待补标注（Warning）/ 闲置素材（Warning）；`--bindings` 多素材绑定自检 |
@@ -172,3 +175,4 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - 2026-10-10 v1.6.0 即梦 Seedance 2.5 实查收录：新增 `references/jimeng-seedance-2.5.md`（CLI 实查：能力规格 / 素材上限 / 积分参考 / 提示词规则 / 审核限制，含三层来源分级与时效注明）；平台硬约束表 2.5 口径由「发布材料未实测」升级为「CLI 实查」（参考图 ≤30、时长 4–30s、分辨率至 1080p、提示词上限 15000）；`references/prompt-craft.md` 的 2.5 段规格回填、行为四探测标注为待跑；`references/asset-workflow.md` 新增「真人素材作首帧：重构图规范」（首帧四要素 / 重构图工序 / 验收三查）。
 - 2026-10-12 v1.7.0 同业技能实践吸收（三块）：①多人戏调度——铁律区新增预排四步（俯视站位/走位链/视线目标/反打检查），`references/agent-prompt.md` 系统提示词新增「多人场景预排」节与自检补项；②场景展示判断——多集工作流新增三分法（首现交代/低频带出/高频直入），`references/continuity-log.md` 新增「场景出场记录」节与记录表；③验收与接收纪律——成本纪律新增「视觉验收纪律」（文件有效不替代视觉验收、按形态逐镜检查、只声称读过实际读到的部分），多集工作流分集补「已读范围」纪律；触发示例扩至 16 类，description 补触发词。
 - 2026-10-14 v1.8.0 生态融合（第一批+第二批，调研档 `docs/ecosystem-survey-2026-10.md` 第七节路线）：①机检扩充——`scripts/validate_storyboard.py` 新增 C8 否定式高关联约束 / C9 并列主体句式 / C10 抽象过程形态词三条告警检查 + 门日志与 `--stats` 汇总（哪道检查最常响=最该改措辞）；②引用核对升级——`scripts/check_refs.py` 断链区分「显式待补」（行内标注待补→降级为警告）+ `--bindings` 多素材绑定自检；③段缝衔接——`references/continuity-log.md` 新增第五节（三方案：末态双保险/换机位硬切/空镜过渡；接续状态末帧画面纪律），`transition-editing.md` 补集间延长衔接用法；④否定失效三改法——`references/prompt-craft.md` 新增第七节（词根敏感性/换词/主体优先句式/触发器移除/栏目纪律）；⑤前置锁定与交付纪律——平台硬约束补「先锁两件再动笔」、成本纪律补「交付形态先定、按名交付」；⑥复测判定——`references/jimeng-seedance-2.5.md` 行为复测判定节（reproduced/degraded/failed + 样本数）；排障表 2 行（否定失效/段缝衔接）；description 补触发词；README 同步。
+- 2026-10-14 v1.9.0 生态融合（第三批·新模块，调研档第七节路线）：①面部表演工艺——新增 `references/facs-micro-expression.md`（FACS 四区写法、真假笑、强度三档与起-hold-落、常用情绪配方、结果词禁令与投喂翻译纪律）；②情绪节拍与开场钩子——新增 `references/emotion-beat-curve.md`（12 节拍情绪曲线体检表 + 三条判定 + 钩子模式库 + 2 秒结构模板）；③打戏预演——新增 `references/action-previs.md`（R1-R3 强度档 / 15 秒完播结构 / 11 环动力链 / 镜头五要素 / 防守三态 / 物理反馈分级）；④后期工具路线对照（`transition-editing.md`）：ffmpeg 与剪映草稿路线的适用边界与去重提示；description 补触发词（微表情/打戏/情绪节拍/开场钩子）；README 与索引表同步。

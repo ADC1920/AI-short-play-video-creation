@@ -17,6 +17,9 @@
 | `references/continuity-log.md` | 连续性台账：连续性账 / 段缝衔接 / 场景出场记录 / Take 记录 / 提示词版本账（多集一致性管理） |
 | `references/audio-voice.md` | 声音与配音：四轨设计、角色音色表、台词标注、Edge TTS 落地、混音检查 |
 | `references/jimeng-seedance-2.5.md` | 即梦 Seedance 2.5 规则与限制（CLI 实查）：能力规格、素材上限、积分参考、提示词规则、审核限制、复测判定 |
+| `references/facs-micro-expression.md` | 面部表演工艺：四区微表情写法、真假笑、强度三档与起-hold-落、常用情绪配方 |
+| `references/emotion-beat-curve.md` | 情绪节拍与开场钩子：12 节拍曲线体检表、钩子模式库、2 秒结构模板 |
+| `references/action-previs.md` | 打戏预演：R1-R3 强度档、15 秒完播结构、11 环动力链、镜头五要素、防守三态 |
 | `scripts/validate_storyboard.py` | 分镜 JSON 机检：数量 / 词数 / 字符上限 / 必含排除词（中英兼容）/ 禁用句式 / 编号重复 / 否定词根·并列主体·抽象形态告警；门日志 `--stats` |
 | `scripts/make_grid.py` | 本地拼宫格（4/6/9/25：`--cols 2/3/5`），依赖 Pillow |
 | `scripts/check_refs.py` | 素材与 @ 引用核对：断链（Error）/ 待补标注（Warning）/ 闲置素材（Warning）；`--bindings` 多素材绑定自检 |
@@ -29,7 +32,7 @@
 - **路线 B 宫格分镜直生**：剧情一句话 → 分镜 JSON（可机检）→ 宫格分镜图 → 一张图直出 15s 连贯片段。
 - **路线 C 人脸审核规避五法**：人物参考图被人脸检测拦截时的五种替代方案，各带生成与使用提示词。
 
-另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构；写分镜前跑场景展示判断——首现交代/低频带出/高频直入）、多人戏调度四步预排（站位/走位/视线/轴线，`references/agent-prompt.md`）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`，含抽帧/裁剪/拼接的 ffmpeg 落地命令）、多集连续性台账与段缝衔接（`references/continuity-log.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算 / 视觉验收纪律）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、即梦 Seedance 2.5 规则与限制（CLI 实查档案，`references/jimeng-seedance-2.5.md`）、故障首修表、首镜 2 秒钩子法则。
+另有：多集长剧工作流（分集 → 每集项目目录 → 素材全剧共用，`scripts/init_project.py` 一键建结构；写分镜前跑场景展示判断——首现交代/低频带出/高频直入）、多人戏调度四步预排（站位/走位/视线/轴线，`references/agent-prompt.md`）、素材锚点法与 ref 一致性红线（`references/asset-workflow.md`）、分镜图工艺与三层分离（`references/frame-industrial.md`）、提示词进阶工艺与否定失效三改法（`references/prompt-craft.md`）、转场决策与编辑延长（`references/transition-editing.md`，含抽帧/裁剪/拼接的 ffmpeg 落地命令与剪映路线对照）、多集连续性台账与段缝衔接（`references/continuity-log.md`）、面部表演工艺 FACS 微表情（`references/facs-micro-expression.md`）、情绪节拍与开场钩子（`references/emotion-beat-curve.md`）、打戏预演（`references/action-previs.md`）、声音与配音模块（`references/audio-voice.md`）、台词语速折算与时间轴式提示词、成本与确认纪律（先图后视频两层 / 逐集解锁 / 重生预算 / 视觉验收纪律）、素材引用核对（`scripts/check_refs.py`）、平台硬约束核对表、即梦 Seedance 2.5 规则与限制（CLI 实查档案，`references/jimeng-seedance-2.5.md`）、故障首修表、首镜 2 秒钩子法则。
 
 ## 快速上手（最小示例）
 

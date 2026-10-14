@@ -1,5 +1,15 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.9.0 — 2026-10-14
+
+GitHub 生态调研（2026-10）第七节路线第三批·新模块融合。来源项目：manju-laoli-skill（FACS 引擎 / 情绪曲线 / 打戏动力学）、higgsfield-seedance2-jineng（短视频钩子框架）——理念级改写，分值与模式为自检参考，证据边界在各文档内标注：
+
+- **面部表演工艺**：新增 `references/facs-micro-expression.md`——不写「开心/难过/邪魅」结果词的肌肉动作写法（四区：眉/眼/颧颊/嘴下颌）、强度三档（痕/显/强）与「起-hold-落」时序、真假笑（眼参与与否）与惊讶/恐惧等易混对、常用情绪配方表、遮挡与单侧纪律、投喂翻译纪律（AU 编号不进正文）。
+- **情绪节拍与开场钩子**：新增 `references/emotion-beat-curve.md`——12 节拍情绪曲线体检表（0-10 分参考值 + 三条判定：峰不少于 2/黄金 3 秒/第 9 拍最高峰）、峰值拍的资源分工口径、开场钩子模式库（10 模式）与 2 秒结构模板（抓注意→建好奇→势能→承诺）。
+- **打戏预演**：新增 `references/action-previs.md`——R1-R3 动作强度三档、15 秒完播结构（开局接触/节奏呼吸/运镜切换/情绪拐点/高潮定格）、11 环动力链（力从地起→腰胯放大→定点接触→形变可见→惯性可接）、镜头五要素与两条空间铁律、防守溃败链与闪避大幅化、物理反馈分级、特效四要素。
+- **后期工具路线对照**（`references/transition-editing.md` 新增第十节）：ffmpeg 路线（跨平台默认）与剪映草稿路线的适用边界与去重提示（既有剪映类工具优先复用，本技能保持工具中立）。
+- description 补触发词（微表情/面部表演、打戏/动作段、情绪节拍与开场钩子）；README 与索引表同步。
+
 ## 1.8.0 — 2026-10-14
 
 GitHub 生态调研（2026-10，`docs/ecosystem-survey-2026-10.md`）第七节路线第一、二批融合落地。来源项目：manju-laoli-skill / shuohao-skills / zenstory-ai drama-skills / liyue-aigc Seedance 2.5 Video Director / LearnPrompt 证据治理——均为理念级改写，证据强度边界在各文档内标注：
