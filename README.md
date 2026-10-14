@@ -1,6 +1,6 @@
 # ai-short-play-video-creation · AI 短剧创作工作流
 
-把一句话剧情或完整剧本，变成可执行的 AI 短剧视频（动态漫/漫剧、写实风等形态通用）：分镜蓝图、宫格分镜图、逐镜视频提示词一条龙。适用于 Claude Code / ZCode 等 Agent 的 Skill 机制（SKILL.md + 按需加载的 references）。
+把一句话剧情或完整剧本，变成可执行的 AI 短剧视频（动态漫/漫剧、写实风等形态通用）——从分镜蓝图、宫格分镜图、逐镜视频提示词，到素材一致性、多集连续性与段缝衔接、面部表演与打戏设计、情绪节拍与开场钩子、配音、转场与排障的完整工作流。适用于 Claude Code / ZCode / Codex 等 Agent 的 Skill 机制（SKILL.md + 按需加载的 references）。
 
 ## 技能结构
 
@@ -24,6 +24,7 @@
 | `scripts/make_grid.py` | 本地拼宫格（4/6/9/25：`--cols 2/3/5`），依赖 Pillow |
 | `scripts/check_refs.py` | 素材与 @ 引用核对：断链（Error）/ 待补标注（Warning）/ 闲置素材（Warning）；`--bindings` 多素材绑定自检 |
 | `scripts/init_project.py` | 多集项目脚手架：一键生成标准目录结构 |
+| `scripts/archive_old_docx.py` | docx 交付版本管理：旧版自动移入 `_旧版归档/`（保留清单 / `--dry-run` 预览 / 占用容错），供一切 docx 交付项目复用 |
 | `CHANGELOG.md` | 版本记录 |
 
 ## 三条路线
@@ -61,6 +62,7 @@ python scripts/validate_storyboard.py --selftest
 python scripts/make_grid.py --selftest          # 需要 pip install pillow
 python scripts/check_refs.py --selftest
 python scripts/init_project.py --selftest
+python scripts/archive_old_docx.py --selftest
 ```
 
 ## License
