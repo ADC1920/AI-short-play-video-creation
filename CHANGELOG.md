@@ -2,7 +2,7 @@
 
 ## 1.10.0 — 2026-10-15
 
-生态融合（第四批·第二轮四项目调研，调研档 `docs/ecosystem-survey-2026-10-b.md`）。来源：OpenMontage（calesthio/OpenMontage，agent 流水线制作平台）、HyperFrames（heygen-com/hyperframes，HTML 代码渲染引擎）、Hypit（hypit-ai/hypit，词锚定爆款复刻）、Brag（latent-spaces/brag，launch 视频 skill）——**只吸收理念与局部工艺，不搬架构、不引入新运行时依赖**（六条融合点均通过「删掉是否影响主线」闸门）：
+更新说明（参考四个开源项目，来源记录见 `docs/skill-updates-2026-10.md`）。来源：OpenMontage（calesthio/OpenMontage，agent 流水线制作平台）、HyperFrames（heygen-com/hyperframes，HTML 代码渲染引擎）、Hypit（hypit-ai/hypit，词锚定爆款复刻）、Brag（latent-spaces/brag，launch 视频 skill）。只吸收做法和思路，不搬架构、不引入新运行时依赖；六个更新点都过了「删掉会不会影响主线」这一关：
 
 - **对标参考流程**（OpenMontage 参考驱动 + Hypit 复刻纪律）：`SKILL.md` 新增小节——五维拆解（结构/节奏/钩子/字幕样式/素材穿插）→「保留 / 更换」两栏清单 → 差异化方案；红线=学结构不抄内容、不逐帧复刻、不使用无权素材；拆不动时注明估计来源。触发示例 21→22 类。
 - **成片机检三查**（OpenMontage 渲染后自审轻量化）：`references/transition-editing.md` 第九节新增——ffprobe 参数对账 / blackdetect 黑帧检测 / volumedetect 音频电平，三条命令经本机实测（含黑帧检出与无音轨两个对照组）；机检只做粗筛定位，内容仍以逐镜视觉验收为准。
@@ -30,7 +30,7 @@
 
 ## 1.9.1 — 2026-10-14
 
-融合尾部同步与工程优化（v1.8/v1.9 两轮生态融合的收尾 + 规范化）：
+收尾同步与工程优化（v1.8/v1.9 两轮更新的收尾 + 规范化）：
 
 - **触发示例补 5 类新能力话术**（`SKILL.md`，16→21 类）：段缝衔接生硬、微表情/表情崩、打戏/动作段设计、情绪节奏与开场留人、否定失效（写了不要还出现）。
 - **description 精简**至 1024 字符规范内；front-matter 补 `license: MIT` 字段。
@@ -42,7 +42,7 @@
 
 ## 1.9.0 — 2026-10-14
 
-GitHub 生态调研（2026-10）第七节路线第三批·新模块融合。来源项目：manju-laoli-skill（FACS 引擎 / 情绪曲线 / 打戏动力学）、higgsfield-seedance2-jineng（短视频钩子框架）——理念级改写，分值与模式为自检参考，证据边界在各文档内标注：
+参考同业技能（2026-10，第三批·新做法模块）。来源项目：manju-laoli-skill（FACS 引擎 / 情绪曲线 / 打戏动力学）、higgsfield-seedance2-jineng（短视频钩子框架）。均为理念级改写，分值与模式为自检参考，证据边界在各文档内标注：
 
 - **面部表演工艺**：新增 `references/facs-micro-expression.md`——不写「开心/难过/邪魅」结果词的肌肉动作写法（四区：眉/眼/颧颊/嘴下颌）、强度三档（痕/显/强）与「起-hold-落」时序、真假笑（眼参与与否）与惊讶/恐惧等易混对、常用情绪配方表、遮挡与单侧纪律、投喂翻译纪律（AU 编号不进正文）。
 - **情绪节拍与开场钩子**：新增 `references/emotion-beat-curve.md`——12 节拍情绪曲线体检表（0-10 分参考值 + 三条判定：峰不少于 2/黄金 3 秒/第 9 拍最高峰）、峰值拍的资源分工口径、开场钩子模式库（10 模式）与 2 秒结构模板（抓注意→建好奇→势能→承诺）。
@@ -52,7 +52,7 @@ GitHub 生态调研（2026-10）第七节路线第三批·新模块融合。来�
 
 ## 1.8.0 — 2026-10-14
 
-GitHub 生态调研（2026-10，`docs/ecosystem-survey-2026-10.md`）第七节路线第一、二批融合落地。来源项目：manju-laoli-skill / shuohao-skills / zenstory-ai drama-skills / liyue-aigc Seedance 2.5 Video Director / LearnPrompt 证据治理——均为理念级改写，证据强度边界在各文档内标注：
+参考同业技能（2026-10，第一、二批）。来源项目：manju-laoli-skill / shuohao-skills / zenstory-ai drama-skills / liyue-aigc Seedance 2.5 Video Director / LearnPrompt 证据治理。均为理念级改写，证据强度边界在各文档内标注：
 
 - **机检扩充**（`scripts/validate_storyboard.py`）：新增 C8 否定式高关联约束告警（光效/表情/空镜的「不 X / 无 X」写法——被禁词根会被当画面词渲染）、C9 并列主体句式告警（「同框」类写法易被渲染成两个主体）、C10 抽象过程形态词告警（「成线 / 如注」类模型无法命名的过程形态）；均为告警级实测经验检查，附白名单防误报（不禁/不由等）。
 - **门失败统计**（`scripts/validate_storyboard.py`）：每次校验默认追加 `.gate-log.jsonl`（`--no-log` 关闭、写不进去静默跳过），`--stats` 汇总「哪道检查最常响」——最常响的检查 = 最该改提示词措辞或复核该规则。
@@ -117,7 +117,7 @@ GitHub 生态调研（2026-10，`docs/ecosystem-survey-2026-10.md`）第七节�
 
 ## 1.4.0 — 2026-10-09
 
-分镜图工艺融合（工业流水线实践吸收）：
+分镜图工艺更新（吸收工业流水线实践）：
 
 - 新增 `references/frame-industrial.md`（分镜图工艺专题）：
   - 三层工艺分离铁律——素材图=身份证（平光/信息优先）、分镜图=视频首帧（戏剧光/三层景深）、视频段=动作连贯；三层参数不可互套，双污染方向防护（风格词污染 + 重描污染）。
@@ -156,7 +156,7 @@ GitHub 生态调研（2026-10，`docs/ecosystem-survey-2026-10.md`）第七节�
 
 ## 1.1.0 — 2026-10-09
 
-行业实践融合（GitHub 短剧生态 6 源调研吸收）：
+行业实践更新（参考 6 个短剧相关来源）：
 
 - 铁律新增：引用即锁定（@引用后禁止重描外貌）、提示词两种写法（清单式 + 时间轴式）、台词时长折算（中文 4–5 字/秒）、关键帧接力与视频延长并列。
 - 新增 `references/asset-workflow.md`：素材锚点法、ref 数量红线（1 主角 ≈95% / 3+ 主角 <50%）、候选图选择制、人工把关清单、文字入图规则。

@@ -36,7 +36,7 @@
 | 实体同步 | `scripts/sync_entity.py` | 备份、差异扫描、md5 复核、dry-run、prune |
 | 双根核对 | `scripts/check_double_root.py` | 双根部署、硬链、samefile、补链、fix |
 
-## 四、调研导航
+## 四、资料导航
 
 - 本地唯一开发源：本工作区（git 仓库，main）；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation`（静态复制，落后时手动同步）。
 - 远程：https://github.com/ADC1920/AI-short-play-video-creation
