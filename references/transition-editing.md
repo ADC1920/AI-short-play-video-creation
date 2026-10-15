@@ -169,13 +169,31 @@ ffmpeg -f concat -safe 0 -i list.txt -c copy 成片.mp4
 
 某段参数不同（分辨率/帧率不一致）时 `-c copy` 会拼接失败或花屏，该段单独重编码统一参数后再拼。拼接后建议抽尾帧核验实际结尾，并核对总时长。
 
-## 十、后期工具路线对照（ffmpeg vs 剪映草稿）
+**成片机检三查（交付前粗筛定位，替代不了的仍是逐镜目检）**：
+
+```bash
+# ① 参数对账：分辨率 / 帧率 / 时长（与分镜表核对）
+ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -show_entries format=duration -of default=nw=1 成片.mp4
+# 音轨核对（无音轨时输出为空——空即结论：成片没有音轨）
+ffprobe -v error -select_streams a -show_entries stream=codec_name,channels -of default=nw=1 成片.mp4
+
+# ② 黑帧检测（阈值为起步值，按片调整；命中输出 black_start/black_end/black_duration）
+ffmpeg -i 成片.mp4 -vf "blackdetect=pix_th=0.10:d=0.5" -an -f null - 2>&1 | grep blackdetect
+
+# ③ 音频电平：查全程静音与削峰（无音轨时会报 Output file does not contain any stream——先回 ①b 确认音轨）
+ffmpeg -i 成片.mp4 -af "volumedetect" -vn -f null - 2>&1 | grep -E "mean_volume|max_volume"
+```
+
+判据：①时长与「镜数 × 单镜时长」对账，分辨率/帧率与目标画幅一致，音轨存在且声道数正确；②除片头片尾刻意设计的黑场外不应命中，命中即按 black_start 秒数去查那一处；③mean_volume 低于 -40dB 为全程静音疑点，max_volume 触 0dB 为削峰（重混或整体降 1–3dB）。以上命令经本机实测（含黑帧检出与无音轨两个对照组）；机检通过只说明「参数与电平和载体没坏」，内容对不对仍按逐镜视觉验收走。
+
+## 十、后期工具路线对照（ffmpeg / 剪映草稿 / 代码渲染）
 
 本技能的后期落地以**本机 ffmpeg 命令**为准（第九节）——跨平台、零依赖、命令可复现、可进脚本。另有「剪映草稿生成 / 编辑」路线：部分开源工具可直接生成或改写剪映草稿文件，省手工剪辑。
 
 - **适用边界**：剪映草稿格式与剪映版本强绑定（版本升级草稿结构会变），生成类工具的稳定性不如 ffmpeg 路线——用于编辑器友好与人工精修场景，不承担批量流水线。
 - **去重提示**：若环境已具备剪映无界面编辑能力（如 Mac 平台的剪映自动化技能类工具），**直接复用既有工具**，不要在本技能内重复实现剪映能力。
 - **本技能保持工具中立**：交付物是「哪些镜头、什么顺序、切点在哪、声音怎么走」——落地走 ffmpeg（跨平台）或剪映类工具（编辑器友好），按环境二选一。
+- **代码渲染路线（第三选，按需启用）**：文字动效、图表、数据卡、片头包装这类「没有实拍内容、全靠排版与图形运动」的段落，可用 HTML/CSS/JS 动画在无头浏览器里逐帧渲染成确定性视频——同一输入必得同一输出，适合 CI 与批量参数化变体（代表工具 HyperFrames，HeyGen 开源，2026；同类思路有 Remotion）。不适合实拍/表演类内容。引入成本为 Node.js 22+ 生态（`npx hyperframes`），环境未备时不启用、只作路线留存；需要时与环境现有路线并列评估。
 
 ## 十一、与现有文档的关系
 

@@ -1,5 +1,17 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.10.0 — 2026-10-15
+
+生态融合（第四批·第二轮四项目调研，调研档 `docs/ecosystem-survey-2026-10-b.md`）。来源：OpenMontage（calesthio/OpenMontage，agent 流水线制作平台）、HyperFrames（heygen-com/hyperframes，HTML 代码渲染引擎）、Hypit（hypit-ai/hypit，词锚定爆款复刻）、Brag（latent-spaces/brag，launch 视频 skill）——**只吸收理念与局部工艺，不搬架构、不引入新运行时依赖**（六条融合点均通过「删掉是否影响主线」闸门）：
+
+- **对标参考流程**（OpenMontage 参考驱动 + Hypit 复刻纪律）：`SKILL.md` 新增小节——五维拆解（结构/节奏/钩子/字幕样式/素材穿插）→「保留 / 更换」两栏清单 → 差异化方案；红线=学结构不抄内容、不逐帧复刻、不使用无权素材；拆不动时注明估计来源。触发示例 21→22 类。
+- **成片机检三查**（OpenMontage 渲染后自审轻量化）：`references/transition-editing.md` 第九节新增——ffprobe 参数对账 / blackdetect 黑帧检测 / volumedetect 音频电平，三条命令经本机实测（含黑帧检出与无音轨两个对照组）；机检只做粗筛定位，内容仍以逐镜视觉验收为准。
+- **发布包装**（Brag 海报帧工艺）：`SKILL.md` 成本与确认纪律新增——最佳帧作封面（判据：画面完整/主体清晰/能代表内容）+ 分享文案具体忌套话。
+- **词锚定迭代原则**（Hypit）：`references/prompt-craft.md` 时间粒度节补段——改词/多语言迭代保持词序骨架、只换词内容，时间轴按语速折算重新流动，不手排秒表。
+- **预算三步账**（OpenMontage 预算治理轻量化）：`SKILL.md` 成本纪律「批量确认」条目升级为「估算 → 确认 → 记账」——镜数 × 积分预估、样片确认、生成后记成败重试数（入 Take 记录）。
+- **代码渲染路线指针**（HyperFrames）：`references/transition-editing.md` 第十节补第三路线——文字动效/图表/片头包装可用 HTML/GSAP 确定性渲染（代表工具 HyperFrames），引入成本 Node.js 生态，环境未备只留路线。
+- description 补触发词（参考视频对标 / reference-video benchmarking）。
+
 ## 1.9.3 — 2026-10-15
 
 双根实体维护配套（`sync_entity` 的双根场景补件，来自双根部署实战）：
