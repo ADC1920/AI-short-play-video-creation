@@ -1,6 +1,6 @@
 ---
 name: ai-short-play-video-creation
-version: 1.11.0
+version: 1.12.0
 description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目、连续性台账、段缝衔接、转场（剪辑做还是模型做）、视频编辑/延长、配音/旁白/TTS/音色、BGM 卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、微表情/面部表演、打戏/动作段、情绪节拍与开场钩子、多人戏调度/站位轴线、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接、参考视频对标（学结构不抄内容）时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出系统提示词、工程级分镜蓝图、排障速查与操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition & editing, dubbing, continuity ledgers, segment-seam continuity, blocking & axis, scene staging, FACS micro-expression, action previs, emotional beats & hooks, face-check workarounds, negative-prompt workarounds, reference-video benchmarking, troubleshooting, multi-episode adaptation."
 license: MIT
 ---
@@ -127,7 +127,7 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - **交付形态先定、按名交付**：「只要提示词 / 只要分镜 / 只诊断 / 按原结构改写」是输出约束——只交付被点名的成品，不代做下游、不夹带修改未点名的文件。缺失的次要参数用**标注默认**补齐（普通新片无时长按 15s、画幅无指定按 9:16，均注明「补充默认」）；只有真歧义（素材身份、编辑目标、延长方向）才提问，且一次问全。
 - **视觉验收纪律（防假验收）**：未实际查看生成的图/视频，不得声称视觉验收通过——文件有效（JSON 过机检、文件存在、能打开、拼接命令 exit 0）不能替代视觉去看。实际结果逐镜检查：写实形态查身份/肤质/光影/手指，动画形态查造型/头身比/线条/色板/人数；发现问题给具体的重生成提示词，不改口说没问题。剧本侧同理：只声称读过实际读到的部分。
 - **交付版本管理（旧版自动归档）**：docx 成品交付（剧本/脚本/方案等一切文档）遵循「当前版在交付根目录、旧版在归档子目录」；每次新版交付后把旧版移入 `<交付路径>/_旧版归档/`（移动非删除、可回滚，不主动删除旧版），纳入交付固定流程——执行 `python scripts/archive_old_docx.py <交付路径> "<当前版文件名.docx>" [更多保留名] [--dry-run]`（`--selftest` 自检）；多版本长交付项目（逐镜脚本、多集剧本等）一律启用。
-- **发布包装（成片交付最后一步）**：①封面帧——从成片挑**最佳帧**（画面完整、主体清晰、能代表内容）单独导出作封面图（抽帧命令见 `references/transition-editing.md` 第九节）；平台若只能从视频首帧取封面，剪辑时确保首帧可看（不留黑场或过渡帧入点）。②分享文案——1-3 句，说清这条视频是什么 + 一个具体看点；忌「激动地宣布」类套话，多平台可给变体。
+- **发布包装（成片交付最后一步）**：①封面帧——从成片挑**最佳帧**（画面完整、主体清晰、能代表内容）单独导出作封面图（抽帧命令见 `references/transition-editing.md` 第十节）；平台若只能从视频首帧取封面，剪辑时确保首帧可看（不留黑场或过渡帧入点）。②分享文案——1-3 句，说清这条视频是什么 + 一个具体看点；忌「激动地宣布」类套话，多平台可给变体。
 
 ## 排障速查（生成结果不对时先查这里）
 
@@ -165,7 +165,7 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `references/asset-workflow.md` | 做人物/场景素材时；保角色一致性时（锚点法 / ref 数量红线 / 候选图选择 / 把关清单 / 文字入图规则 / ref 库规模标准） |
 | `references/frame-industrial.md` | 出每镜关键帧时；三层工艺分离 / 8 段式写法 / 非人形主角偏置对策 / 4 模选档 / 长提示词并发限流 |
 | `references/prompt-craft.md` | 提示词打不准/漂移时；多素材绑定、作用域与末态法则、时间粒度、否定失效三改法、模型实测档案 |
-| `references/transition-editing.md` | 规划转场（剪辑做还是模型做）、编辑已有视频、向前/向后延长、集间延长衔接、接龙 |
+| `references/transition-editing.md` | 规划转场（剪辑做还是模型做）、缝的类型命名与帧级切点对齐、编辑已有视频、向前/向后延长、集间延长衔接、接龙 |
 | `references/continuity-log.md` | 多集项目一致性管理：连续性账 / 段缝衔接 / Take 记录 / 提示词版本账 / 证据分级 |
 | `references/audio-voice.md` | 配音/旁白/BGM/音效设计：四轨规划、角色音色表、台词标注公式、Edge TTS 落地、混音检查 |
 | `references/jimeng-seedance-2.5.md` | 用即梦 Seedance 2.5 出片前：能力规格、素材上限、积分参考、提示词规则、审核限制、复测判定（CLI 实查档案） |
@@ -203,3 +203,5 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - 2026-10-14 v1.9.2 收尾补件：①新增 `scripts/sync_entity.py`——技能实体同步一键化（安全检查 → 差异扫描 → 备份 → 同步 → md5 复核；`--dry-run` 预演 / `--prune` 清多余；排除承载与仓库级资产，列表维护在脚本顶部常量），selftest 覆盖全路径（含排除根级文件与备份防重名两处修复）；②脚本索引表补录 `archive_old_docx.py`（v1.7.1 加入时遗漏）与 `sync_entity.py`；③README 补「样例与自动检查」指引（examples 与 CI）；④AGENTS/project-info/CI/CHANGELOG 六脚本口径同步。
 - 2026-10-15 v1.9.3 双根维护配套：新增 `scripts/check_double_root.py`（双根核对与补链——内容 + 硬链逐件核对，只修「内容相同非硬链」，默认双根由脚本位置推导；`sync_entity` 双根场景的固定收尾步）；七脚本口径同步（AGENTS/README/CI/project-info/CHANGELOG）。
 - 2026-10-15 v1.10.0 更新（参考四个开源项目）：①对标参考流程（OpenMontage 参考驱动 + Hypit 复刻纪律）——五维拆解 →「保留 / 更换」两栏清单 → 差异化方案，红线=学结构不抄内容、不逐帧复刻；②成片机检三查（OpenMontage 渲染后自审轻量化）——ffprobe 参数对账 / blackdetect 黑帧检测 / volumedetect 音频电平，落 `transition-editing.md`，三条命令经本机实测（含黑帧与无音轨对照组）；③发布包装（Brag 海报帧工艺）——最佳帧作封面 + 分享文案忌套话，落成本与确认纪律区；④词锚定迭代原则（Hypit）——改词/多语言保持词序骨架、时间轴按语速折算重新流动，落 `prompt-craft.md` 时间粒度节；⑤预算三步账（OpenMontage 预算治理轻量化）——估算 → 确认 → 记账，强化成本纪律「批量确认」既有条目；⑥代码渲染路线指针（HyperFrames）——落 `transition-editing.md` 第十节；触发示例 21→22 类、description 补触发词（参考视频对标 / reference-video benchmarking）。
+- 2026-10-15 v1.11.0 接缝量化检测与排版修复工具：新增 `scripts/check_seams.py`（相邻分镜尾帧/首帧的四维量化分与综合偏差排序，阈值经人工判定样本校准）与 `scripts/fix_table_pagination.py`（docx 分页修复四项，带 selftest）；九脚本口径同步（AGENTS/README/CHANGELOG/CI/project-info）。
+- 2026-10-15 v1.12.0 缝的类型与帧级切点对齐：`references/transition-editing.md` 新增同名节——转场命名四类（序幕缝/机位缝/动作缝/落点缝，各带意图与验收点）＋帧级切点对齐三步（拍长网格换算、裁齐整拍时长、切点 N＝N×整拍时长）；节号顺延（九/十/十一→十/十一/十二）与 `SKILL.md` 内引用同步。
