@@ -35,6 +35,8 @@
 | `scripts/archive_old_docx.py` | docx 交付版本管理：旧版移入 `_旧版归档/`，支持 `--dry-run` 预览 |
 | `scripts/sync_entity.py` | 技能实体同步：备份、差异扫描、md5 复核一条链 |
 | `scripts/check_double_root.py` | 双根部署核对与补链：内容与硬链逐件检查，只修「内容相同非硬链」 |
+| `scripts/check_seams.py` | 成片接缝质量量化检测：相邻分镜尾帧/首帧的四维色差指标与综合偏差排序 |
+| `scripts/fix_table_pagination.py` | docx 分页修复：表格行不跨页、标题防孤行、操作顺序段防切半 |
 | `CHANGELOG.md` | 版本记录 |
 
 ## 快速上手
@@ -42,7 +44,7 @@
 1. **有剧本**：走路线 A。把 `references/agent-prompt.md` 里的系统提示词贴进对话助手，输入剧本，得到分镜蓝图，再按蓝图逐镜执行。
 2. **只有一句话**：走路线 B。生成宫格分镜 JSON，用 `python scripts/make_grid.py -o grid.png <图片目录>` 拼成宫格图，再直出视频。
 3. **工程工具**：素材引用核对 `python scripts/check_refs.py <项目目录>`，分镜 JSON 机检 `python scripts/validate_storyboard.py <story.json>`，多集项目建目录 `python scripts/init_project.py <项目目录> --episodes 12`。
-4. **样例项目**：`examples/demo-multi-ep/` 是一个最小多集样例，带占位素材、剧本和分镜 JSON。可以拿来参照，也用作回归测试，命令见该目录的 README。push 时 GitHub Actions 会自动跑七个脚本的自检，加上样例项目的端到端回归。
+4. **样例项目**：`examples/demo-multi-ep/` 是一个最小多集样例，带占位素材、剧本和分镜 JSON。可以拿来参照，也用作回归测试，命令见该目录的 README。push 时 GitHub Actions 会自动跑九个脚本的自检，加上样例项目的端到端回归。
 
 ## 安装
 
@@ -60,7 +62,7 @@ git clone https://github.com/ADC1920/AI-short-play-video-creation.git "$env:USER
 
 ## 脚本自检
 
-七个脚本都带 selftest，改动后逐个跑一遍即可：
+九个脚本都带 selftest，改动后逐个跑一遍即可：
 
 ```bash
 python scripts/validate_storyboard.py --selftest
@@ -70,6 +72,8 @@ python scripts/init_project.py --selftest
 python scripts/archive_old_docx.py --selftest
 python scripts/sync_entity.py --selftest
 python scripts/check_double_root.py --selftest
+python scripts/check_seams.py --selftest          # 需要 pip install numpy pillow；实景抽帧需 ffmpeg（无则自动跳过）
+python scripts/fix_table_pagination.py --selftest
 ```
 
 ## License

@@ -1,6 +1,6 @@
 ---
 name: ai-short-play-video-creation
-version: 1.10.0
+version: 1.11.0
 description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目、连续性台账、段缝衔接、转场（剪辑做还是模型做）、视频编辑/延长、配音/旁白/TTS/音色、BGM 卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、微表情/面部表演、打戏/动作段、情绪节拍与开场钩子、多人戏调度/站位轴线、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接、参考视频对标（学结构不抄内容）时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出系统提示词、工程级分镜蓝图、排障速查与操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition & editing, dubbing, continuity ledgers, segment-seam continuity, blocking & axis, scene staging, FACS micro-expression, action previs, emotional beats & hooks, face-check workarounds, negative-prompt workarounds, reference-video benchmarking, troubleshooting, multi-episode adaptation."
 license: MIT
 ---
@@ -179,6 +179,8 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `scripts/archive_old_docx.py` | docx 交付版本管理：旧版自动移入 `_旧版归档/`（保留清单 / `--dry-run` 预览 / 占用容错） |
 | `scripts/sync_entity.py` | 技能实体同步：备份 → 差异扫描 → 同步 → md5 复核一条链（`--dry-run` 预演 / `--prune` 清多余） |
 | `scripts/check_double_root.py` | 技能双根核对与补链（`.zcode`+`.agents` 双根部署）：内容 md5 + 硬链 samefile 逐件核对；只修「内容相同非硬链」（`--fix`），不一致只报告 |
+| `scripts/check_seams.py` | 成片接缝质量量化检测：对相邻分镜「上一段尾帧 vs 下一段首帧」计算 SSIM／亮度差／色相差／饱和差四维指标＋综合偏差排序（模式 A：分镜目录两两成缝；模式 B：拼接成片＋切点列表）；阈值经人工判定样本校准，用于定位与复核视觉上「不顺」的缝 |
+| `scripts/fix_table_pagination.py` | docx 分页修复（排版后处理）：表格行不跨页＋跨页表头重复、加粗标题与标签行防孤行、表头行与首数据行同页、操作顺序类短段防页界切半 |
 
 ## 更新记录
 

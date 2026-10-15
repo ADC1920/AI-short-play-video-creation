@@ -14,11 +14,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install deps
-        run: pip install pillow
-      - name: Selftests (seven scripts)
+        run: pip install pillow numpy python-docx
+      - name: Selftests (nine scripts)
         run: |
           set -e
-          for s in validate_storyboard check_refs init_project make_grid archive_old_docx sync_entity check_double_root; do
+          for s in validate_storyboard check_refs init_project make_grid archive_old_docx sync_entity check_double_root check_seams fix_table_pagination; do
             echo "== $s =="
             python "scripts/$s.py" --selftest
           done
