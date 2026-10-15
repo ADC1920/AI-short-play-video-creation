@@ -2,7 +2,7 @@
 
 ## 1.10.0 — 2026-10-15
 
-更新说明（参考四个开源项目，来源记录见 `docs/skill-updates-2026-10.md`）。来源：OpenMontage（calesthio/OpenMontage，agent 流水线制作平台）、HyperFrames（heygen-com/hyperframes，HTML 代码渲染引擎）、Hypit（hypit-ai/hypit，词锚定爆款复刻）、Brag（latent-spaces/brag，launch 视频 skill）。只吸收做法和思路，不搬架构、不引入新运行时依赖；六个更新点都过了「删掉会不会影响主线」这一关：
+更新说明（参考四个开源项目）。来源：OpenMontage（calesthio/OpenMontage，agent 流水线制作平台）、HyperFrames（heygen-com/hyperframes，HTML 代码渲染引擎）、Hypit（hypit-ai/hypit，词锚定爆款复刻）、Brag（latent-spaces/brag，launch 视频 skill）。只吸收做法和思路，不搬架构、不引入新运行时依赖；六个更新点都过了「删掉会不会影响主线」这一关：
 
 - **对标参考流程**（OpenMontage 参考驱动 + Hypit 复刻纪律）：`SKILL.md` 新增小节——五维拆解（结构/节奏/钩子/字幕样式/素材穿插）→「保留 / 更换」两栏清单 → 差异化方案；红线=学结构不抄内容、不逐帧复刻、不使用无权素材；拆不动时注明估计来源。触发示例 21→22 类。
 - **成片机检三查**（OpenMontage 渲染后自审轻量化）：`references/transition-editing.md` 第九节新增——ffprobe 参数对账 / blackdetect 黑帧检测 / volumedetect 音频电平，三条命令经本机实测（含黑帧检出与无音轨两个对照组）；机检只做粗筛定位，内容仍以逐镜视觉验收为准。
