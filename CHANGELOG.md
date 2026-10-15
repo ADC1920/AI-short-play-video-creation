@@ -1,5 +1,12 @@
 # CHANGELOG · ai-short-play-video-creation
 
+## 1.9.3 — 2026-10-15
+
+双根实体维护配套（`sync_entity` 的双根场景补件，来自双根部署实战）：
+
+- **新增 `scripts/check_double_root.py`**——技能双根核对与补链：逐件核对内容（md5）与硬链（samefile）；只修「内容相同但非硬链」的右根文件（以左根为目标重建硬链），内容不一致只报告不擅动；默认双根由脚本位置推导（`<home>/.zcode|.agents/skills/<技能>/scripts/` 布局下自动定位另一侧同名技能），也可显式传左右根；`--fix` 执行修复，selftest 覆盖六个判定路径。定位：`sync_entity.py` 对双根部署的新增文件会在两侧各自复制而断链，本工具是其固定收尾步。
+- **七脚本口径同步**：`AGENTS.md`（验证基线 + 实体同步面补双根核对步）、`README.md`（结构表 + 自检命令）、`SKILL.md`（索引表 + 更新记录）、`docs/project-info.md`（计数 / 模块表 / 自测入口 / 版本号）、CI 工作流（自检循环加入 `check_double_root`）。
+
 ## 1.9.2 — 2026-10-14
 
 收尾补件（审计发现项落地）：

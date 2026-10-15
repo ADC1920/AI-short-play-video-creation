@@ -26,6 +26,7 @@
 | `scripts/init_project.py` | 多集项目脚手架：一键生成标准目录结构 |
 | `scripts/archive_old_docx.py` | docx 交付版本管理：旧版自动移入 `_旧版归档/`（保留清单 / `--dry-run` 预览 / 占用容错），供一切 docx 交付项目复用 |
 | `scripts/sync_entity.py` | 技能实体同步：备份 → 差异扫描 → 同步 → md5 复核一条链（`--dry-run` 预演 / `--prune` 清多余） |
+| `scripts/check_double_root.py` | 技能双根核对与补链：内容 + 硬链逐件核对，只修「内容相同非硬链」（`--fix`），适用于 `.zcode` + `.agents` 双根部署 |
 | `CHANGELOG.md` | 版本记录 |
 
 ## 三条路线
@@ -41,7 +42,7 @@
 1. **有剧本**：让 Agent 走路线 A——把 `references/agent-prompt.md` 的系统提示词粘进对话助手，贴剧本得分镜蓝图，逐镜生成。
 2. **只有一句话梗概**：走路线 B——生成宫格分镜 JSON，备好图片后用 `python scripts/make_grid.py -o grid.png <图片目录>` 本地拼宫格，宫格图直出视频。
 3. **工程工具**：素材与 @ 引用核对 `python scripts/check_refs.py <项目目录>`；分镜 JSON 机检 `python scripts/validate_storyboard.py <story.json>`；多集项目建结构 `python scripts/init_project.py <项目目录> --episodes 12`。
-4. **样例与自动检查**：`examples/demo-multi-ep/` 是最小多集样例（占位素材 + 剧本 + 分镜 JSON），可作上手参照，也用于回归试跑（命令见该目录 README）；push 时 GitHub Actions 自动跑六脚本自检 + 样例端到端回归（`.github/workflows/selftest.yml`）。
+4. **样例与自动检查**：`examples/demo-multi-ep/` 是最小多集样例（占位素材 + 剧本 + 分镜 JSON），可作上手参照，也用于回归试跑（命令见该目录 README）；push 时 GitHub Actions 自动跑七脚本自检 + 样例端到端回归（`.github/workflows/selftest.yml`）。
 
 ## 安装
 
@@ -66,6 +67,7 @@ python scripts/check_refs.py --selftest
 python scripts/init_project.py --selftest
 python scripts/archive_old_docx.py --selftest
 python scripts/sync_entity.py --selftest
+python scripts/check_double_root.py --selftest
 ```
 
 ## License
