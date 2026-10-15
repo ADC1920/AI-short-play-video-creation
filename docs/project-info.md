@@ -1,4 +1,4 @@
-# project-info · AI-short-play-video-creation（五节索引）
+# project-info · AI-short-play-video-creation（三节索引）
 
 > 本文件=工作区导航索引（索引式，不复制技能正文）。开工按「任务关键词 → 锚词 → 文件」定位再读，不盲扫全仓（细则 #275/#276）。
 
@@ -35,16 +35,3 @@
 | 旧版归档 | `scripts/archive_old_docx.py` | 交付版本管理、_旧版归档、dry-run、selftest |
 | 实体同步 | `scripts/sync_entity.py` | 备份、差异扫描、md5 复核、dry-run、prune |
 | 双根核对 | `scripts/check_double_root.py` | 双根部署、硬链、samefile、补链、fix |
-
-## 四、参考资源
-
-- `CHANGELOG.md`：完整版本史（v1.0.0 → v1.10.0，含更名链 manju-video → ai-short-play-video → ai-short-play-video-creation）。
-- `README.md`：技能结构表、安装指引（克隆或复制到技能根目录）、脚本自检命令。
-- `memory/agent-log.md`：会话留档（本地，不入库）。
-- `AGENTS.md`：项目级规则（本文件的上游指针）。
-- 远程仓库：https://github.com/ADC1920/AI-short-play-video-creation
-- 自测：`python scripts/<脚本>.py --selftest`（七个全过为基线）；CI 在 push 时自动跑七个脚本自检和样例回归。
-
-## 五、复述确认
-
-一句话：本工作区是「AI 短剧创作工作流」技能的开发源与承载根——技能本体随 GitHub 仓库发布，本地留档走 memory/agent-log.md，本机技能实体（.agents/skills）是需手动同步的静态副本。
