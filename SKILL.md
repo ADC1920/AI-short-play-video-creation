@@ -1,6 +1,6 @@
 ---
 name: ai-short-play-video-creation
-version: 1.12.0
+version: 1.13.0
 description: "AI 短剧创作工作流技能（动态漫/漫剧/写实风等形态通用）。当用户要制作 AI 短剧、漫剧、动态漫、竖屏微短剧、漫画风视频，或有一句话剧情/剧情梗概要快速成片，或提到 Seedance、即梦、Jimeng、Gemini 分镜脚本、Nano Banana 参考图、宫格分镜（4/6/9/25宫格）、@素材引用、素材锚点/参考图一致性、引用核对、多集项目、连续性台账、段缝衔接、转场（剪辑做还是模型做）、视频编辑/延长、配音/旁白/TTS/音色、BGM 卡点、字幕同步、人脸审核限制/人脸不过审、内容审核敏感词、负面约束失效（写了不要还出现）、Liblib 哩布哩布、分镜提示词、时间轴提示词、分镜图、关键帧候选、三层工艺分离、拟物化角色偏置、视频生成提示词、长剧多集改编、微表情/面部表演、打戏/动作段、情绪节拍与开场钩子、多人戏调度/站位轴线、场景首现与重复出场交代、视觉验收、分镜 JSON 校验、九宫格拼图、镜头衔接、参考视频对标（学结构不抄内容）时使用；生成的视频出现人脸漂移换人、角色重复、多余字幕水印、风格漂移、拼接跳帧等故障要排障时也用。产出系统提示词、工程级分镜蓝图、排障速查与操作指引。AI short-drama video creation with Seedance / Jimeng (motion comic, style-agnostic): storyboard agent prompts, grid storyboard JSON, @reference assets, transition & editing, dubbing, continuity ledgers, segment-seam continuity, blocking & axis, scene staging, FACS micro-expression, action previs, emotional beats & hooks, face-check workarounds, negative-prompt workarounds, reference-video benchmarking, troubleshooting, multi-episode adaptation."
 license: MIT
 ---
@@ -179,7 +179,7 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 | `scripts/archive_old_docx.py` | docx 交付版本管理：旧版自动移入 `_旧版归档/`（保留清单 / `--dry-run` 预览 / 占用容错） |
 | `scripts/sync_entity.py` | 技能实体同步：备份 → 差异扫描 → 同步 → md5 复核一条链（`--dry-run` 预演 / `--prune` 清多余） |
 | `scripts/check_double_root.py` | 技能双根核对与补链（`.zcode`+`.agents` 双根部署）：内容 md5 + 硬链 samefile 逐件核对；只修「内容相同非硬链」（`--fix`），不一致只报告 |
-| `scripts/check_seams.py` | 成片接缝质量量化检测：对相邻分镜「上一段尾帧 vs 下一段首帧」计算 SSIM／亮度差／色相差／饱和差四维指标＋综合偏差排序（模式 A：分镜目录两两成缝；模式 B：拼接成片＋切点列表）；阈值经人工判定样本校准，用于定位与复核视觉上「不顺」的缝 |
+| `scripts/check_seams.py` | 成片接缝质量量化检测：对相邻分镜「上一段尾帧 vs 下一段首帧」计算 SSIM／亮度差／色相差／饱和差／运动持续性五维指标＋综合偏差排序（模式 A：分镜目录两两成缝；模式 B：拼接成片＋切点列表）；阈值经人工判定样本校准，用于定位与复核视觉上「不顺」的缝 |
 | `scripts/fix_table_pagination.py` | docx 分页修复（排版后处理）：表格行不跨页＋跨页表头重复、加粗标题与标签行防孤行、表头行与首数据行同页、操作顺序类短段防页界切半 |
 
 ## 更新记录
@@ -205,3 +205,4 @@ Seedance 对真实人脸有人脸检测，人物参考图常被拦。五种规�
 - 2026-10-15 v1.10.0 更新（参考四个开源项目）：①对标参考流程（OpenMontage 参考驱动 + Hypit 复刻纪律）——五维拆解 →「保留 / 更换」两栏清单 → 差异化方案，红线=学结构不抄内容、不逐帧复刻；②成片机检三查（OpenMontage 渲染后自审轻量化）——ffprobe 参数对账 / blackdetect 黑帧检测 / volumedetect 音频电平，落 `transition-editing.md`，三条命令经本机实测（含黑帧与无音轨对照组）；③发布包装（Brag 海报帧工艺）——最佳帧作封面 + 分享文案忌套话，落成本与确认纪律区；④词锚定迭代原则（Hypit）——改词/多语言保持词序骨架、时间轴按语速折算重新流动，落 `prompt-craft.md` 时间粒度节；⑤预算三步账（OpenMontage 预算治理轻量化）——估算 → 确认 → 记账，强化成本纪律「批量确认」既有条目；⑥代码渲染路线指针（HyperFrames）——落 `transition-editing.md` 第十节；触发示例 21→22 类、description 补触发词（参考视频对标 / reference-video benchmarking）。
 - 2026-10-15 v1.11.0 接缝量化检测与排版修复工具：新增 `scripts/check_seams.py`（相邻分镜尾帧/首帧的四维量化分与综合偏差排序，阈值经人工判定样本校准）与 `scripts/fix_table_pagination.py`（docx 分页修复四项，带 selftest）；九脚本口径同步（AGENTS/README/CHANGELOG/CI/project-info）。
 - 2026-10-15 v1.12.0 缝的类型与帧级切点对齐：`references/transition-editing.md` 新增同名节——转场命名四类（序幕缝/机位缝/动作缝/落点缝，各带意图与验收点）＋帧级切点对齐三步（拍长网格换算、裁齐整拍时长、切点 N＝N×整拍时长）；节号顺延（九/十/十一→十/十一/十二）与 `SKILL.md` 内引用同步。
+- 2026-10-17 v1.13.0 接缝检测运动持续性指标：`scripts/check_seams.py` 新增第五指标「运动持续性」——切点两侧各取「接缝帧与其前 tail 秒帧」的帧间运动量（灰度平均绝对差），比值的 log10 偏差归一化（0＝两侧运动量相近；一侧骤停或骤起时升高）；阈值 0.55 经真实样本校准（正常缝 0.013-0.45 自然分布、极端缝 0.64）；JSON 输出含两侧运动量原始值（me_tail/me_head），`--no-flow` 可关闭退回四维；selftest 扩至 8 项。

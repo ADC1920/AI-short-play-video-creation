@@ -35,5 +35,5 @@
 | 旧版归档 | `scripts/archive_old_docx.py` | 交付版本管理、_旧版归档、dry-run、selftest |
 | 实体同步 | `scripts/sync_entity.py` | 备份、差异扫描、md5 复核、dry-run、prune |
 | 双根核对 | `scripts/check_double_root.py` | 双根部署、硬链、samefile、补链、fix |
-| 接缝量化检测 | `scripts/check_seams.py` | 尾帧/首帧、SSIM、亮度差、色相差、饱和差、综合偏差、两种模式 |
+| 接缝量化检测 | `scripts/check_seams.py` | 尾帧/首帧、SSIM、亮度差、色相差、饱和差、运动持续性、综合偏差、两种模式 |
 | docx 分页修复 | `scripts/fix_table_pagination.py` | 表格不跨页、表头重复、防孤行、操作顺序段、keepLines |
