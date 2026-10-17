@@ -26,7 +26,7 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 
-EXCLUDE = {".git", "AGENTS.md", "docs", "memory", ".github", "examples"}
+EXCLUDE = {".git", "AGENTS.md", "docs", "memory", ".github", "examples", "__pycache__"}
 MAX_LIST = 20  # 差异清单每类最多打印条数
 
 
