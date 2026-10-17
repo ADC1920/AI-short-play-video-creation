@@ -17,11 +17,11 @@
 |---|---|
 | `SKILL.md` | 主入口：三条路线、对标参考流程、铁律与核心公式、平台硬约束、成本与确认纪律、排障速查、多集工作流，以及完整的文件与脚本索引 |
 | `references/` | 13 篇工艺文档：分镜智能体系统提示词、宫格直生、人脸规避、素材一致性、分镜图工艺、提示词进阶、衔接与后期、连续性台账、声音配音、即梦 Seedance 2.5 实测、微表情、情绪钩子、打戏预演 |
-| `scripts/` | 9 个工程脚本：分镜 JSON 机检、拼宫格、@引用核对、多集脚手架、旧版归档、实体同步、双根核对、接缝量化检测、docx 分页修复 |
+| `scripts/` | 13 个工程脚本：分镜 JSON 机检、拼宫格、@引用核对、多集脚手架、旧版归档、实体同步、双根核对、接缝量化检测、一键验收、生成清单、统一裁切、版本生成引擎、docx 分页修复 |
 | `examples/demo-multi-ep/` | 最小多集样例（占位素材、剧本、分镜 JSON），可以拿来参照，也用作回归测试 |
 | `docs/` | 工作区索引（project-info）与技能更新说明 |
 | `AGENTS.md` · `CHANGELOG.md` · `LICENSE` | 维护口径、版本记录、MIT 协议 |
-| `.github/workflows/selftest.yml` | CI：push 时自动跑九个脚本自检，加上样例项目的端到端回归 |
+| `.github/workflows/selftest.yml` | CI：push 时自动跑十三个脚本自检，加上样例项目的端到端回归 |
 
 脚本逐个的说明见 SKILL.md 的「参考文件与脚本索引」。
 
@@ -41,7 +41,7 @@ git clone https://github.com/ADC1920/AI-short-play-video-creation.git "$env:USER
 
 ## 脚本自检
 
-九个脚本都带 selftest，改动后逐个跑一遍即可：
+十三个脚本都带 selftest，改动后逐个跑一遍即可：
 
 ```bash
 python scripts/validate_storyboard.py --selftest
@@ -53,6 +53,10 @@ python scripts/sync_entity.py --selftest
 python scripts/check_double_root.py --selftest
 python scripts/check_seams.py --selftest          # 需要 pip install numpy pillow；实景抽帧需 ffmpeg（无则自动跳过）
 python scripts/fix_table_pagination.py --selftest
+python scripts/qa_batch.py --selftest            # 需 numpy pillow；需 ffmpeg（无则自动跳过）
+python scripts/manifest.py --selftest
+python scripts/trim_clips.py --selftest          # 需 ffmpeg（无则自动跳过）
+python scripts/gen_script.py --selftest
 ```
 
 ## License

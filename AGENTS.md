@@ -15,7 +15,7 @@
 ## 项目纪律（本项目特有）
 - **仓库定位**：公开技能仓库——发布物=技能本体（`SKILL.md` / `references/` / `scripts/` / `README.md` / `CHANGELOG.md` / `LICENSE`）；`memory/` 为本地承载（已从版本控制排除），`docs/` 为开发导航。
 - **版本与提交**：版本号落 `CHANGELOG.md`（SKILL.md front-matter `version` 同步）；提交遵守仓库惯例 `<类型>(<范围>):〈动词开头描述〉`（如 `feat(skill): v1.6.0 …`，类型前缀跟随历史 feat/fix/docs/refactor/chore）；push=对外发布（L3，须用户确认）。
-- **验证基线**：改动技能后跑九脚本自检 `python scripts/validate_storyboard.py --selftest`（另八件 check_refs/init_project/make_grid/archive_old_docx/sync_entity/check_double_root/check_seams/fix_table_pagination 同法）全过再提交；`make_grid.py` 需 Pillow，`check_seams.py` 需 numpy/Pillow（实景抽帧另需 ffmpeg，无则跳过）。CI（`.github/workflows/selftest.yml`）在 push 时自动跑同样九件 + `examples/demo-multi-ep/` 端到端回归。
+- **验证基线**：改动技能后跑十三脚本自检 `python scripts/validate_storyboard.py --selftest`（另十二件 check_refs/init_project/make_grid/archive_old_docx/sync_entity/check_double_root/check_seams/fix_table_pagination/qa_batch/manifest/trim_clips/gen_script 同法）全过再提交；`make_grid.py` 需 Pillow，`check_seams.py` 需 numpy/Pillow（实景抽帧另需 ffmpeg，无则跳过）。CI（`.github/workflows/selftest.yml`）在 push 时自动跑同样十三件 + `examples/demo-multi-ep/` 端到端回归（qa_batch/trim_clips 在无 ffmpeg 环境自动跳过实拍部分）。
 - **技能实体同步面**：本工作区=开发源；本机技能实体 `C:\Users\ADC\.agents\skills\ai-short-play-video-creation` 为静态复制（非 git）。发版后同步用 `python scripts/sync_entity.py <实体目录>` 一键完成——自动备份（回滚点落 `~\.agents\skill-backups\`）→ 差异扫描 → 同步 → md5 复核；`--dry-run` 预演。排除项=承载与仓库级资产（AGENTS.md/docs/memory/.github/examples/.git，列表维护在脚本顶部 EXCLUDE 常量），不入实体。已于 2026-10-16 同步至 v1.12.0（v1.9.2 → v1.12.0，含 md5 全量核对）。双根部署（同一技能同时装 `.zcode` 与 `.agents` 两处、硬链同源）时，sync_entity 对新增文件会在两侧各自复制而断链——同步后跑 `python scripts/check_double_root.py <左根> <右根> --fix` 补齐（只修内容相同非硬链；内容不一致只报告）。
 - 权威源顺序：注入核心 → shisan-xinuo-workflow SKILL.md → 本文件 → `docs/project-info.md`。
 
